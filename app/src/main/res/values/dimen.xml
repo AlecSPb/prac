@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dashboard_main_heading">32dp</dimen>
+    <dimen name="dashboard_sub_heading">16dp</dimen>
+    <dimen name="dashboard_primary_text">12dp</dimen>
+    <dimen name="dashboard_secondary_text">10dp</dimen>
+    <dimen name="secondary_text_size">12dp</dimen>
+    <dimen name="primary_text_size">14dp</dimen>
+</resources>
