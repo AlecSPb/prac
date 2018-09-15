@@ -9,15 +9,35 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class Helper {
 
-    public static void showDialogBox(final Context context){
+    public static void showDialogBox(final Context context, String title, String description1, String description2, final String text_button, final String order_id) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialog_box);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
+        TextView dialog_title = (TextView) dialog.findViewById(R.id.dialog_title);
+        TextView dialog_description = (TextView) dialog.findViewById(R.id.dialog_description1);
+        TextView dialong_description2 = (TextView) dialog.findViewById(R.id.dialog_description2);
+
+        dialog_title.setText(title);
+        dialog_description.setText(description1);
+        dialong_description2.setText(description2);
 
         TextView dialogBtn_cancel = (TextView) dialog.findViewById(R.id.cancel_button);
         dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -28,15 +48,75 @@ public class Helper {
             }
         });
 
-        TextView confirm = (TextView) dialog.findViewById(R.id.confirm_button);
+        final TextView confirm = (TextView) dialog.findViewById(R.id.confirm_button);
+        confirm.setText(text_button);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Toast.makeText(context,"Okay" ,Toast.LENGTH_SHORT).show();
+                if (text_button.equals("Yes,Customer not available")) {
+                    StatusUpdateService(context, order_id, text_button);
+                    dialog.dismiss();
+                    Toast.makeText(context,"Customer not Available",Toast.LENGTH_SHORT).show();
+                } else if (text_button.equals("Mark as delivered")) {
+                    StatusUpdateService(context, order_id, text_button);
+                    dialog.dismiss();
+                    Toast.makeText(context,"Order Returned",Toast.LENGTH_SHORT).show();
+
+                } else if (text_button.equals("Mark as Return")) {
+                    StatusUpdateService(context, order_id, text_button);
+                    dialog.dismiss();
+                    Toast.makeText(context, "Order Returned", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
 
         dialog.show();
     }
+
+
+    public static void StatusUpdateService(final Context context, String order_id, String status) {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("order_id", order_id);
+            jsonObject.put("status", status);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        // put your json here
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        Request request = new Request.Builder()
+                .url("http://orders.ekuep.com/api/update-order-status")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                if (response.isSuccessful()) {
+
+
+                    //final String data = response.body().string();
+//                             Toast.makeText(PickUpActivity.this,data,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+
+
+
 }

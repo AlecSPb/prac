@@ -44,7 +44,7 @@
         android:layout_marginBottom="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Some Arabic Text"
+        android:text="يرجى مسح حزم لالتقاط وتسليم الطلبات"
         android:textColor="@color/primary_text_color"
         android:textSize="@dimen/dashboard_primary_text"
         app:layout_constraintBottom_toTopOf="@+id/text_powered_by"
@@ -91,12 +91,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:background="@mipmap/scan_button_line"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/scan_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/cancel_button"
             app:layout_constraintVertical_bias="0.0" />
     </LinearLayout>
 
@@ -106,7 +106,7 @@
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Some Arabic Text"
+        android:text="مرحبا بكم في التطبيق التسليم"
         android:textColor="@color/secondary_text_color"
         android:textSize="18dp"
         android:textStyle="bold"
