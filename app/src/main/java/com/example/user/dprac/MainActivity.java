@@ -106,7 +106,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onOptionsItemSelected(item);
 
         if(item.getItemId() == R.id.logout) {
-
+            SharedPrefManager.getInstance(getApplicationContext()).Logout();
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            intent.putExtra("flag",true);
+            finishAffinity();
+            startActivity(intent);
             }
 
         if(item.getItemId() == R.id.history){

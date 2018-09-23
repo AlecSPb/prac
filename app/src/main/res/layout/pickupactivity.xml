@@ -180,7 +180,7 @@
         app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="@+id/linearLayout3"
         app:layout_constraintTop_toTopOf="@+id/linearLayout3"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/product_image1" />
 
     <TextView
         android:id="@+id/order_no"

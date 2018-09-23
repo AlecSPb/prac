@@ -6,4 +6,6 @@
     <string name="dummy_date">Tuesday 7th September 2018</string>
     <string name="dummy_time">09:34 PM</string>
     <string name="dummy_desc">Nuovo Simoneli Appia II Semiautomatic 2 group Espresso  Machine</string>
+
+    <string name="square_blue_name">square_blue</string>
 </resources>

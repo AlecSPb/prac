@@ -62,7 +62,7 @@ List<OrderHistory> yesterday_list;
 
     public void prepareTodayList(){
         for(int i=0;i<3;i++){
-            OrderHistory order = new OrderHistory(R.mipmap.product_image,"Order # 965874582","Nuovo Simoneli Appia II Semiautomatic 2 group Espresso",
+            OrderHistory order = new OrderHistory(R.mipmap.product_image1,"Order # 965874582","Nuovo Simoneli Appia II Semiautomatic 2 group Espresso",
                     "Tuesday 7th September 2018","09:34 PM");
             orderList.add(order);
         }
@@ -71,7 +71,7 @@ List<OrderHistory> yesterday_list;
 
     public void prepareYesterdayList(){
         for(int i=0;i<3;i++){
-            OrderHistory order = new OrderHistory(R.mipmap.product_image,"Order # 965874582","Nuovo Simoneli Appia II Semiautomatic 2 group Espresso",
+            OrderHistory order = new OrderHistory(R.mipmap.product_image1,"Order # 965874582","Nuovo Simoneli Appia II Semiautomatic 2 group Espresso",
                     "Tuesday 7th September 2018","09:34 PM");
             yesterday_list.add(order);
         }
