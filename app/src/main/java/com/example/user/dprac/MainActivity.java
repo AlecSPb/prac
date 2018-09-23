@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,6 +14,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.barcode.Barcode;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -91,4 +94,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.logout) {
+
+            }
+
+        if(item.getItemId() == R.id.history){
+            startActivity(new Intent(MainActivity.this,HistoryActivity.class));
+        }
+
+        return true;
+    }
+
+
 }

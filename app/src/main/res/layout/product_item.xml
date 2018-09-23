@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:id="@+id/number"
+     android:text="01."
+     android:textColor="@color/primary_text_color"
+     android:layout_marginLeft="10dp"
+     android:layout_marginTop="15dp"
+     android:textSize="12dp"
+     />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/number"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Nuovo Simonelli Premier Maxi V2 GR"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="14dp"
+            android:id="@+id/product_title"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serial_number"
+            android:text="Serial # 965874724"
+            android:textColor="@color/primary_text_color"
+            android:textSize="12dp"
+            android:layout_marginTop="3dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quantity"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:text="1"
+        android:textColor="@color/dialog_box_text_color"
+        android:textSize="14dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/quantity"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="5dp"
+        android:text="X"
+        android:textColor="@color/dialog_box_text_color"
+        android:textSize="14dp"
+        android:id="@+id/cross"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/cross"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="5dp"
+        android:text="5,555.00"
+        android:textColor="@color/dialog_box_text_color"
+        android:textSize="14dp"
+        android:id="@+id/price"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/price"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="5dp"
+        android:text="SAR"
+        android:textColor="@color/dialog_box_text_color"
+        android:textSize="14dp"
+        android:id="@+id/sar"/>
+
+</RelativeLayout>

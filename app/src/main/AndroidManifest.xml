@@ -31,6 +31,15 @@
         <activity android:name=".PickUpActivity">
 
         </activity>
+
+        <activity android:name=".OrderDetailActivity1">
+
+        </activity>
+
+
+        <activity android:name=".HistoryActivity">
+
+        </activity>
     </application>
 
 </manifest>

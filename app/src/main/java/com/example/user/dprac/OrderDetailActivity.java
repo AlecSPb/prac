@@ -70,7 +70,7 @@ public class OrderDetailActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void run() {
                 try {
-                    jsonObject = new JSONObject(getIntent().getStringExtra("data"));
+                    jsonObject = new JSONObject(getIntent().getStringExtra("order_data"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

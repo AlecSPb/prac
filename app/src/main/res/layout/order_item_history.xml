@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="14dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_image_box"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/square_shadow"
+        >
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/product_image"
+            android:src="@mipmap/ic_launcher"
+            android:padding="15dp"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/order_no"
+        android:layout_toRightOf="@+id/product_image_box"
+        android:layout_alignParentTop="true"
+        android:textSize="14dp"
+        android:text="Order # 39239402"
+        android:textColor="@color/heading_color"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_desc"
+        android:layout_toRightOf="@+id/product_image_box"
+        android:layout_below="@+id/order_no"
+        android:text="@string/dummy_desc"
+        android:textSize="14dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/secondary_text_color"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_desc"
+        android:layout_toRightOf="@id/product_image_box">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:text="@string/dummy_date"
+            android:textSize="12dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/primary_text_color"
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:text="@string/dummy_time"
+            android:textSize="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/date"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/primary_text_color"
+            />
+    </RelativeLayout>
+    <!--<View-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0.1dp"-->
+        <!--android:background="@color/primary_text_color"-->
+        <!--android:layout_below="@id/product_image_box"-->
+        <!--android:layout_marginTop="20dp">-->
+
+    <!--</View>-->
+
+</RelativeLayout>
+
+
+

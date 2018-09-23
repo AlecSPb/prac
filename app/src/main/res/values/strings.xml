@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EKUEP DMS</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_date">Tuesday 7th September 2018</string>
+    <string name="dummy_time">09:34 PM</string>
+    <string name="dummy_desc">Nuovo Simoneli Appia II Semiautomatic 2 group Espresso  Machine</string>
 </resources>

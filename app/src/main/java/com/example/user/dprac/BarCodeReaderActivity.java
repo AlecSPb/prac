@@ -30,6 +30,7 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +44,8 @@ import okhttp3.Response;
 
 
 public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeTracker.BarcodeGraphicTrackerCallback  {
-    JSONObject newData;
+    JSONObject order_data;
+    JSONArray product_data;
     String status;
     public static final String BarcodeObject = "Barcode";
 
@@ -84,7 +86,8 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
              */
             String id = barcode.displayValue;
             OkHttpClient okHttpClient = new OkHttpClient();
-            String url = "http://orders.ekuep.com/api/get-order-details/"+id;
+          //  String url = "http://orders.ekuep.com/api/get-order-details/"+id;
+            String url = "http://orders.ekuep.com/api/get-order-product-details/"+id;
             final Request request = new Request.Builder().url(url).build();
 
             okHttpClient.newCall(request).enqueue(new Callback() {
@@ -106,24 +109,28 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
 
                                     try {
                                         JSONObject reader = new JSONObject(data);
-                                         newData = reader.getJSONObject("data");
+                                         order_data = reader.getJSONObject("order_data");
+                                         product_data =reader.getJSONArray("product_data");
+
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
 
                                     try {
-                                        status = newData.getString("naqel_status_text");
+                                        status = order_data.getString("naqel_status_text");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                     if(!status.equals("Shipment Picked Up")){
                                         Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
-                                        intent.putExtra("data",newData.toString());
+                                        intent.putExtra("order_data",order_data.toString());
+                                        intent.putExtra("product_data",product_data.toString());
                                         startActivity(intent);
                                     }else{
-                                        Intent intent = new Intent(BarCodeReaderActivity.this,OrderDetailActivity.class);
-                                        intent.putExtra("data",newData.toString());
+                                        Intent intent = new Intent(BarCodeReaderActivity.this,OrderDetailActivity1.class);
+                                        intent.putExtra("order_data",order_data.toString());
+                                        intent.putExtra("product_data",product_data.toString());
                                         startActivity(intent);
                                     }
 

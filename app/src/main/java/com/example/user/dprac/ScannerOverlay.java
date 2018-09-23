@@ -95,7 +95,8 @@ public class ScannerOverlay extends ViewGroup {
 
 
        Bitmap background = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.product_scan_frame);
-       canvas.drawBitmap(background,left,top,null);
+       //canvas.drawBitmap(background,left,top,null);
+        canvas.drawBitmap(background,200,top,null);
 
 
         // draw horizontal line

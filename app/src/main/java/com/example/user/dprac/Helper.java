@@ -60,7 +60,7 @@ public class Helper {
                 } else if (text_button.equals("Mark as delivered")) {
                     StatusUpdateService(context, order_id, text_button);
                     dialog.dismiss();
-                    Toast.makeText(context,"Order Returned",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Package Delivered",Toast.LENGTH_SHORT).show();
 
                 } else if (text_button.equals("Mark as Return")) {
                     StatusUpdateService(context, order_id, text_button);

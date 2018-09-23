@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +34,7 @@ import okhttp3.Response;
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener{
     TextView order_no;
     JSONObject jsonObject;
+    JSONArray jsonArray;
     Button pick_up;
     String order_id;
     @Override
@@ -62,7 +64,9 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 try {
-                    jsonObject = new JSONObject(getIntent().getStringExtra("data"));
+                    jsonObject = new JSONObject(getIntent().getStringExtra("order_data"));
+
+
 
 
                 } catch (JSONException e) {

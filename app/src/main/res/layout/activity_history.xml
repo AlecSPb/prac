@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabs"
+        android:background="@drawable/tab_bar_background"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:id="@+id/order_tab"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/tab_orders_onpress_icon"
+            android:layout_marginTop="4dp"
+            android:id="@+id/order_icon"/>
+
+        <TextView
+            android:id="@+id/order_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/active_icon_color"
+            android:textSize="12dp"
+            android:layout_marginBottom="1dp"
+            android:text="Orders"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:id="@+id/not_available_tab">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:id="@+id/not_available_icon"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/tab_notavailabe_icon"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/not_available_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text_color"
+                android:textSize="12dp"
+                android:layout_marginBottom="1dp"
+                android:text="Not Available"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:id="@+id/return_tab">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:id="@+id/return_icon"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/tab_returns_icon"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/return_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text_color"
+                android:textSize="12dp"
+                android:layout_marginBottom="1dp"
+                android:text="Return"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainPager"
+        android:layout_above="@+id/tabs">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>
