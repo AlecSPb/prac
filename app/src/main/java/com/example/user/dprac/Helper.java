@@ -54,16 +54,16 @@ public class Helper {
             @Override
             public void onClick(View v) {
                 if (text_button.equals("Yes,Customer not available")) {
-                    StatusUpdateService(context, order_id, text_button);
+                    StatusUpdateService(context, order_id, "Customer not available");
                     dialog.dismiss();
                     Toast.makeText(context,"Customer not Available",Toast.LENGTH_SHORT).show();
                 } else if (text_button.equals("Mark as delivered")) {
-                    StatusUpdateService(context, order_id, text_button);
+                    StatusUpdateService(context, order_id,"Shipment Delivered in Good Condition");
                     dialog.dismiss();
                     Toast.makeText(context,"Package Delivered",Toast.LENGTH_SHORT).show();
 
                 } else if (text_button.equals("Mark as Return")) {
-                    StatusUpdateService(context, order_id, text_button);
+                    StatusUpdateService(context, order_id,"Return to Origin");
                     dialog.dismiss();
                     Toast.makeText(context, "Order Returned", Toast.LENGTH_SHORT).show();
                 }
@@ -92,7 +92,7 @@ public class Helper {
         // put your json here
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
-                .url("http://orders.ekuep.com/api/update-order-status")
+                .url("http://dev-orders.ekuep.com/api/update-order-status")
                 .post(body)
                 .build();
 

@@ -33,15 +33,15 @@ public class OrderDetailActivity1 extends AppCompatActivity implements View.OnCl
     TextView heading;
     Button total;
     String order_id;
-    LinearLayout deliver_button,return_button,customer_not_available_button;
+    Button deliver_button,return_button,customer_not_available_button;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details_activity1);
         productView = (RecyclerView)findViewById(R.id.product_list);
-        deliver_button = (LinearLayout)findViewById(R.id.deliver_package_button);
-        return_button = (LinearLayout)findViewById(R.id.package_return_button);
-        customer_not_available_button = (LinearLayout)findViewById(R.id.customer_not_available_button);
+        deliver_button = (Button) findViewById(R.id.deliver_package_button);
+        return_button = (Button) findViewById(R.id.package_return_button);
+        customer_not_available_button = (Button) findViewById(R.id.customer_not_available_button);
         heading = (TextView)findViewById(R.id.heading_order_details);
         total = (Button)findViewById(R.id.total_amount);
 
@@ -97,12 +97,7 @@ public class OrderDetailActivity1 extends AppCompatActivity implements View.OnCl
         thread.start();
     }
 
-    private void prepareProduct() {
-        for(int i=0;i<3;i++){
-            Product product = new Product("Nuovo Simonelli Premier Maxi V2 GR","Serial # 965874724","5555.00","1");
-            productList.add(product);
-        }
-    }
+
 
     @Override
     public void onClick(View view) {

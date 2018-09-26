@@ -37,123 +37,54 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <LinearLayout
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_box"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/package_return_button"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:paddingLeft="20dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="15dp"
-        android:paddingRight="20dp">
+        android:background="@drawable/package_return_button"
+        >
 
-        <LinearLayout
+    </Button>
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/customer_not_available_button"
             android:orientation="horizontal"
-            android:background="@drawable/customer_not_available_back"
-            android:layout_marginRight="5dp"
+            android:background="@drawable/customer_not_available_button"
+            android:layout_above="@+id/package_return_button"
+            android:layout_marginBottom="10dp"
+
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Customer \nNot Available"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:textSize="10dp"
-                android:layout_weight="1"
-                android:textColor="#e93847"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="العميل غير متوفر"
-                android:textSize="10dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:paddingRight="10dp"
-                android:textColor="#e93847"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:id="@+id/package_return_button"
-            android:orientation="horizontal"
-            android:background="@drawable/package_return_back"
-            android:layout_marginLeft="5dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pacakge
-Return"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:textSize="10dp"
-                android:layout_weight="1"
-                android:textColor="#f984d9"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="عودة الحزمة"
-                android:textSize="10dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:paddingRight="10dp"
-                android:textColor="#f984d9"
-                />
-        </LinearLayout>
+        </Button>
 
 
-    </LinearLayout>
 
-<LinearLayout
+
+
+<Button
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_above="@+id/button_box"
+    android:layout_height="50dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
+    android:layout_above="@+id/customer_not_available_button"
     android:id="@+id/deliver_package_button"
     android:orientation="horizontal"
-    android:background="@drawable/deliver_button_back">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Deliver Package"
-    android:textColor="@color/nav_text_color"
-    android:layout_gravity="center_vertical"
-    android:layout_weight="4"
-    android:paddingLeft="20dp"
-    android:textStyle="bold"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:layout_weight="3"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+    android:background="@drawable/package_delivered_button"
+    android:layout_marginBottom="10dp">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="تسليم الحزمة"
-        android:textColor="@color/nav_text_color"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="4"
-        android:paddingRight="20dp"
-        android:textStyle="bold"/>
-</LinearLayout>
+
+</Button>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

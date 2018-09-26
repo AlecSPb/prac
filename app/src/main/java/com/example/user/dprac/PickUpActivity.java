@@ -14,8 +14,11 @@ import android.util.JsonReader;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,17 +35,23 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener{
-    TextView order_no;
+    TextView order_no,name,address,title,sku;
+    String city,Address,postal_code,country;
     JSONObject jsonObject;
-    JSONArray jsonArray;
     Button pick_up;
     String order_id;
+    ImageView order_image;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pickupactivity);
         order_no = (TextView)findViewById(R.id.order_no);
-        pick_up = (Button)findViewById(R.id.pick_button);
+        name = (TextView)findViewById(R.id.name);
+        address = (TextView)findViewById(R.id.address);
+        title = (TextView)findViewById(R.id.product_title);
+        sku = (TextView)findViewById(R.id.sku);
+        order_image = (ImageView)findViewById(R.id.order_image);
+         pick_up = (Button)findViewById(R.id.pick_button);
         pick_up.setOnClickListener(this);
 
         final Handler handler = new Handler(){
@@ -50,7 +59,21 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
             public void handleMessage(Message msg) {
                 try {
                     order_no.setText(jsonObject.getString("order_id"));
+                    name.setText(jsonObject.getString("name"));
+                    title.setText(jsonObject.getString("company"));
+                    sku.setText("Payment Status: "+jsonObject.getString("payment_method"));
+                    city = jsonObject.getString("city");
+                    postal_code = jsonObject.getString("postal_code");
+                    country = jsonObject.getString("country");
+                    Address = jsonObject.getString("address");
+                    address.setText(Address+", \n"+city+" "+postal_code+","+country);
                     order_id = jsonObject.getString("order_id");
+                    if(jsonObject.getString("qr_image")!=null){
+                        Glide.with(PickUpActivity.this).load(jsonObject.getString("qr_image")).into(order_image);
+                    }
+
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,7 +127,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 // put your json here
                 RequestBody body = RequestBody.create(JSON, jsonObject.toString());
                 Request request = new Request.Builder()
-                        .url("http://orders.ekuep.com/api/update-order-status")
+                        .url("http://dev-orders.ekuep.com/api/update-order-status")
                         .post(body)
                         .build();
 

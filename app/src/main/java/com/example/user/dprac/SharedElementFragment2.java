@@ -125,6 +125,13 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                         });
 
 
+                    }else{
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 }
             });

@@ -12,23 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
 
     </activity>
 
-        <activity android:name=".OrderDetailActivity">
+        <activity android:name=".OrderDetailActivity"
+            android:screenOrientation="portrait">
 
     </activity>
 
-        <activity android:name=".BarCodeReaderActivity">
+        <activity android:name=".BarCodeReaderActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".PickUpActivity">
+        <activity android:name=".PickUpActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".OrderDetailActivity1">
+        <activity android:name=".OrderDetailActivity1"
+            android:screenOrientation="portrait">
 
         </activity>
 
@@ -39,7 +44,8 @@
 
         <activity android:name=".LoginActivity"
             android:theme="@style/LoginAppTheme"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

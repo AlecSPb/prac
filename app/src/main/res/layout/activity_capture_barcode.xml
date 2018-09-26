@@ -19,8 +19,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/common_google_signin_btn_icon_dark_normal"
             android:background="#44000000"
-            app:line_speed="400"
-            app:line_width="4"
+
 
             />
     </com.example.user.dprac.camera.CameraSourcePreview>

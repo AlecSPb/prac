@@ -22,25 +22,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     LinearLayout order_tab,return_tab,not_available_tab;
     TextView order_label,return_label,not_available_label;
     ImageView order_icon,return_icon,not_available_icon;
-    private int[] navIcons = {
-            R.drawable.tab_orders_icon,
-            R.drawable.tab_notavailabe_icon,
-            R.drawable.tab_returns_icon,
 
-    };
-    private String[] navLabels = {
-           "Orders",
-            "Not Available",
-            "Return",
-
-    };
-    // another resouces array for active state for the icon
-    private int[] navIconsActive = {
-            R.drawable.tab_orders_onpress_icon,
-            R.drawable.tab_notavailabe_onpress_icon,
-            R.drawable.tab_returns_onpress_icon,
-
-    };
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

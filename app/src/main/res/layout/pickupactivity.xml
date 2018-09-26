@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="8dp"
-        android:text="Order# "
+        android:text="Order#"
         android:textColor="@color/heading_color"
         android:textSize="14dp"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:id="@+id/sku"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="SKU APPIA II S 2-GR BLACK"
@@ -57,13 +57,14 @@
         android:id="@+id/product_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:text="Nuovo Simoneli Appia II Semiautomatic"
         android:textColor="@color/secondary_text_color"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -84,13 +85,13 @@
         android:layout_width="0dp"
         android:layout_height="0.3dp"
         android:layout_marginBottom="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@color/primary_text_color"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/address_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/address_text"
@@ -111,22 +112,26 @@
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Abi Bakr As Siddiq Rd,"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="48dp"
+        android:gravity="center_horizontal"
+        android:minLines="3"
+        android:padding="10dp"
+        android:text="Dammmam Khobar Highway Opposite Chamber of \n Commerce Dammmam Khobar Highway Opposite\nRiyad 31912,Saudia Arabia "
         android:textColor="@color/secondary_text_color"
-        android:textSize="14dp"
+        android:textSize="12dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Ahad Bin Abdul Aziz"
@@ -168,7 +173,7 @@
         app:layout_constraintStart_toEndOf="@+id/cancel_button" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/order_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="24dp"
