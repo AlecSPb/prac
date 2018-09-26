@@ -156,7 +156,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 // put your json here
                 RequestBody body = RequestBody.create(JSON, jsonObject.toString());
                 Request request = new Request.Builder()
-                        .url("http://dev-orders.ekuep.com/api/update-order-status")
+                        .url("http://orders.ekuep.com/api/update-order-status")
                         .post(body)
                         .build();
 

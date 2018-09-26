@@ -1,5 +1,6 @@
 package com.example.user.dprac;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -34,7 +35,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
   String email,password;
   String status;
   String data;
-  boolean flag=false;
+  Dialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
@@ -52,6 +53,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.signin_btn:
+
                 login();
                 break;
         }
@@ -65,6 +67,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         }else if(!validatePassword()){
             return;
         }else {
+            dialog = Helper.showProgressBar(getContext());
+            dialog.show();
             JSONObject jsonObject = new JSONObject();
             try {
                 email = emailTxt.getEditText().getText().toString().trim();
@@ -81,7 +85,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             // put your json here
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
-                    .url("http://dev-orders.ekuep.com/api/login/driver")
+                    .url("http://orders.ekuep.com/api/login/driver")
                     .post(body)
                     .build();
 
@@ -112,9 +116,11 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                     if(status.equals("200")){
 
                                    SharedPrefManager.getInstance(getActivity()).StoreUser(id,email,token);
+                                   dialog.dismiss();
                                    startActivity(new Intent(getContext(),MainActivity.class));
 
                                     }else{
+                                        dialog.dismiss();
                                         Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
                                     }
 
@@ -129,7 +135,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                                Helper.invalidDialog(getContext());
                             }
                         });
                     }

@@ -29,8 +29,10 @@ public class SharedElementFragment1 extends Fragment {
             public void onFinish() {
                 if(SharedPrefManager.getInstance(getActivity()).isLoggedIn()){
                     startActivity(new Intent(getActivity(),MainActivity.class));
+                }else{
+                    addNextFragment(squareBlue, false);
                 }
-                addNextFragment(squareBlue, false);
+
             }
         }.start();
 

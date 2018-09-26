@@ -109,7 +109,7 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
             String id = barcode.displayValue;
             OkHttpClient okHttpClient = new OkHttpClient();
           //  String url = "http://orders.ekuep.com/api/get-order-details/"+id;
-            String url = "http://dev-orders.ekuep.com/api/get-order-product-details/"+id;
+            String url = "http://orders.ekuep.com/api/get-order-product-details/"+id;
             final Request request = new Request.Builder().url(url).build();
 
             okHttpClient.newCall(request).enqueue(new Callback() {

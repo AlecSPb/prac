@@ -92,7 +92,7 @@ public class Helper {
         // put your json here
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
-                .url("http://dev-orders.ekuep.com/api/update-order-status")
+                .url("http://orders.ekuep.com/api/update-order-status")
                 .post(body)
                 .build();
 
@@ -118,5 +118,35 @@ public class Helper {
 
 
 
+    public static Dialog showProgressBar(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_progress_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        return dialog;
+    }
+
+
+    public static void invalidDialog(Context context){
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_box_invalid_credentials);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView cancel = (TextView) dialog.findViewById(R.id.close_button);
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+
+        dialog.show();
+    }
 
 }
