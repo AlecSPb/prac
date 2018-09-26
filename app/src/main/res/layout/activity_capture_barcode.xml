@@ -5,7 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:keepScreenOn="true">
+<include layout="@layout/toolbar"
+    android:id="@+id/toolbar">
 
+</include>
 
     <com.example.user.dprac.camera.CameraSourcePreview
         android:id="@+id/preview"

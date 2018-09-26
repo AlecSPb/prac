@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,15 +16,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.dprac.camera.CameraSource;
 import com.example.user.dprac.camera.CameraSourcePreview;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
@@ -49,6 +50,7 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
     String status;
     public static final String BarcodeObject = "Barcode";
 
+
     // Intent request code to handle updating play services if needed.
     private static final int RC_HANDLE_GMS = 9001;
 
@@ -60,10 +62,30 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
 
     boolean autoFocus = true;
     boolean useFlash = false;
+    Toolbar toolbar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_barcode);
+
+        /**
+         * Setting up Toolbar
+         */
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_scan_toolbar,null);
+        actionBar.setCustomView(view);
+
+        TextView barTitle = (TextView)findViewById(R.id.bar_title);
+        barTitle.setText("Scan Product");
+
+
+
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
 
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);

@@ -1,6 +1,8 @@
 package com.example.user.dprac;
 
+import android.app.ActionBar;
 import android.app.Dialog;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -10,7 +12,9 @@ import android.os.Message;
 import android.os.TokenWatcher;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.JsonReader;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -35,16 +39,40 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener{
-    TextView order_no,name,address,title,sku;
+    TextView order_no,name,address,title,sku,bar_title;
+    ImageView bar_icon;
     String city,Address,postal_code,country;
     JSONObject jsonObject;
     Button pick_up;
     String order_id;
     ImageView order_image;
+    Toolbar toolbar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pickupactivity);
+
+        /**
+         * Setting up toolbar
+         *
+         */
+        toolbar  =(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        android.support.v7.app.ActionBar actionBar  = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_toolbar,null);
+        actionBar.setCustomView(view);
+
+        bar_icon = (ImageView)findViewById(R.id.bar_icon);
+        bar_title = (TextView)findViewById(R.id.bar_title);
+
+        bar_icon.setImageResource(R.drawable.arrow_icon);
+
+
         order_no = (TextView)findViewById(R.id.order_no);
         name = (TextView)findViewById(R.id.name);
         address = (TextView)findViewById(R.id.address);
@@ -58,6 +86,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void handleMessage(Message msg) {
                 try {
+                    bar_title.setText("Order # "+jsonObject.getString("order_id"));
                     order_no.setText(jsonObject.getString("order_id"));
                     name.setText(jsonObject.getString("name"));
                     title.setText(jsonObject.getString("company"));

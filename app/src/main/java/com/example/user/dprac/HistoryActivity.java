@@ -1,11 +1,14 @@
 package com.example.user.dprac;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,11 +25,29 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     LinearLayout order_tab,return_tab,not_available_tab;
     TextView order_label,return_label,not_available_label;
     ImageView order_icon,return_icon,not_available_icon;
+    Toolbar toolbar;
+    TextView bar_title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        /**
+         * Adding Toolbar
+         */
+
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_toolbar,null);
+        actionBar.setCustomView(view);
+        bar_title = (TextView)findViewById(R.id.bar_title);
+        bar_title.setText("History");
 
         order_tab = (LinearLayout)findViewById(R.id.order_tab);
         return_tab = (LinearLayout)findViewById(R.id.return_tab);
