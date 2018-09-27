@@ -1,19 +1,15 @@
 package com.example.user.dprac;
 
-import android.app.ActionBar;
 import android.app.Dialog;
-import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.TokenWatcher;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -24,7 +20,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +38,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
     ImageView bar_icon;
     String city,Address,postal_code,country;
     JSONObject jsonObject;
-    Button pick_up;
+    Button pick_up,cancel;
     String order_id;
     ImageView order_image;
     Toolbar toolbar;
@@ -80,6 +75,8 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         sku = (TextView)findViewById(R.id.sku);
         order_image = (ImageView)findViewById(R.id.order_image);
          pick_up = (Button)findViewById(R.id.pick_button);
+         cancel = (Button)findViewById(R.id.back_button);
+         cancel.setOnClickListener(this);
         pick_up.setOnClickListener(this);
 
         final Handler handler = new Handler(){
@@ -169,7 +166,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 // put your json here
                 RequestBody body = RequestBody.create(JSON, jsonObject.toString());
                 Request request = new Request.Builder()
-                        .url("http://orders.ekuep.com/api/update-order-status")
+                        .url(Constants.live_url+"update-order-status")
                         .post(body)
                         .build();
 
@@ -198,7 +195,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
 
-            case R.id.cancel_button:
+            case R.id.back_button:
                 finish();
                 break;
 

@@ -11,12 +11,39 @@
 
     </include>
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_deliverd_box"
+        android:background="@drawable/order_delivered_back"
+        android:layout_below="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Delivered"
+            android:layout_alignParentLeft="true"
+            android:padding="10dp"
+            android:id="@+id/heading_order_deliver"
+            android:textColor="@color/nav_text_color"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="أجل تسليم"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:textColor="@color/nav_text_color"/>
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_box"
         android:background="@drawable/activity_background"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/text_deliverd_box">
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,53 +78,21 @@
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/package_return_button"
+        android:id="@+id/back_button"
         android:orientation="horizontal"
+        android:background="@drawable/back_button_background"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/package_return_button"
-        >
+     >
+
+
 
     </Button>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/customer_not_available_button"
-            android:orientation="horizontal"
-            android:background="@drawable/customer_not_available_button"
-            android:layout_above="@+id/package_return_button"
-            android:layout_marginBottom="10dp"
-
-            >
-
-        </Button>
-
-
-
-
-
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_above="@+id/customer_not_available_button"
-    android:id="@+id/deliver_package_button"
-    android:orientation="horizontal"
-    android:background="@drawable/package_delivered_button"
-    android:layout_marginBottom="10dp">
-
-
-
-</Button>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_above="@+id/deliver_package_button"
+        android:layout_above="@+id/back_button"
         android:id="@+id/total_amount_box"
         android:layout_marginBottom="10dp">
 
@@ -123,18 +118,18 @@
             android:textColor="@color/nav_text_color"
             />
     </LinearLayout>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="0.1dp"
-    android:layout_above="@+id/total_amount_box"
-    android:id="@+id/seperator"
-    android:background="@color/primary_text_color"
-    android:layout_marginBottom="15dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="40dp"
-    android:layout_marginRight="40dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_above="@+id/total_amount_box"
+        android:id="@+id/seperator"
+        android:background="@color/primary_text_color"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
-</View>
+    </View>
 </RelativeLayout>
 
 

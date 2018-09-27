@@ -274,7 +274,7 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
   public void orderService(String id){
 
       OkHttpClient okHttpClient = new OkHttpClient();
-      String url = "http://orders.ekuep.com/api/get-order-product-details/"+id;
+      String url = Constants.live_url+"get-order-product-details/"+id;
       final Request request = new Request.Builder().url(url).build();
 
       okHttpClient.newCall(request).enqueue(new Callback() {
@@ -307,18 +307,39 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
                           } catch (JSONException e) {
                               e.printStackTrace();
                           }
-                          if(!status.equals("Shipment Picked Up")){
-                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
+                          if(status.equals("Shipment Delivered in Good Condition")){
+                              Intent intent = new Intent(BarCodeReaderActivity.this,DeliveredOrderActivity.class);
                               intent.putExtra("order_data",order_data.toString());
                               intent.putExtra("product_data",product_data.toString());
                               startActivity(intent);
-                          }else{
-                              Intent intent = new Intent(BarCodeReaderActivity.this,OrderDetailActivity1.class);
+                          }else if(status.equals("Customer not available")){
+                              Intent intent = new Intent(BarCodeReaderActivity.this,CustomerNotAvailable.class);
+                              intent.putExtra("order_data",order_data.toString());
+                              intent.putExtra("product_data",product_data.toString());
+                              startActivity(intent);
+                          }else if(status.equals("Return By Customer")){
+                              Intent intent = new Intent(BarCodeReaderActivity.this,ReturnByCustomer.class);
                               intent.putExtra("order_data",order_data.toString());
                               intent.putExtra("product_data",product_data.toString());
                               startActivity(intent);
                           }
-
+                          else if(status.equals("Shipment Picked Up")){
+                              Intent intent = new Intent(BarCodeReaderActivity.this,OrderDetailActivity1.class);
+                              intent.putExtra("order_data",order_data.toString());
+                              intent.putExtra("product_data",product_data.toString());
+                              startActivity(intent);
+                          }else{
+                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
+                              intent.putExtra("order_data",order_data.toString());
+                              intent.putExtra("product_data",product_data.toString());
+                              startActivity(intent);
+                          }
+//                         else if(!status.equals("Shipment Picked Up") && !status.equals("Shipment Delivered in Good Condition")){
+//                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
+//                              intent.putExtra("order_data",order_data.toString());
+//                              intent.putExtra("product_data",product_data.toString());
+//                              startActivity(intent);
+//                          }
 
 
                       }

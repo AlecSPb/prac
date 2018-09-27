@@ -85,7 +85,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             // put your json here
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
-                    .url("http://orders.ekuep.com/api/login/driver")
+                    .url(Constants.live_url+"login/driver")
                     .post(body)
                     .build();
 
