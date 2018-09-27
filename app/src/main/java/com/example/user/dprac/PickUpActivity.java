@@ -88,15 +88,28 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 try {
                     bar_title.setText("Order # "+jsonObject.getString("order_id"));
                     order_no.setText(jsonObject.getString("order_id"));
-                    name.setText(jsonObject.getString("name"));
-                    title.setText(jsonObject.getString("company"));
-                    sku.setText("Payment Status: "+jsonObject.getString("payment_method"));
+
+                    if(jsonObject.getString("name")!=null){
+                        name.setText(jsonObject.getString("name"));
+                    }
+
+                    if(jsonObject.getString("company")!=null){
+                        title.setText(jsonObject.getString("company"));
+                    }
+
+                  if(jsonObject.getString("payment_method")!=null){
+                      sku.setText("Payment Status: "+jsonObject.getString("payment_method"));
+                  }
+
                     city = jsonObject.getString("city");
                     postal_code = jsonObject.getString("postal_code");
                     country = jsonObject.getString("country");
                     Address = jsonObject.getString("address");
-                    address.setText(Address+", \n"+city+" "+postal_code+","+country);
-                    order_id = jsonObject.getString("order_id");
+                  if(jsonObject.getString("address")!=null){
+                      address.setText(Address+", \n"+city+" "+postal_code+","+country);
+                  }
+
+                  order_id = jsonObject.getString("order_id");
                     if(jsonObject.getString("qr_image")!=null){
                         Glide.with(PickUpActivity.this).load(jsonObject.getString("qr_image")).into(order_image);
                     }

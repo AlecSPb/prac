@@ -102,80 +102,32 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
     public void onDetectedQrCode(Barcode barcode) {
         if (barcode != null) {
 
+       //    dialog =  Helper.showProgressBar(this);
+         //  dialog.show();
 
             /**
              * Calling Service of getting order
              */
             String id = barcode.displayValue;
-            OkHttpClient okHttpClient = new OkHttpClient();
-          //  String url = "http://orders.ekuep.com/api/get-order-details/"+id;
-            String url = "http://orders.ekuep.com/api/get-order-product-details/"+id;
-            final Request request = new Request.Builder().url(url).build();
-
-            okHttpClient.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Toast.makeText(BarCodeReaderActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-
-                     if(response.isSuccessful()){
-                            final String data = response.body().string();
-
-                            BarCodeReaderActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-
-
-                                    try {
-                                        JSONObject reader = new JSONObject(data);
-                                         order_data = reader.getJSONObject("order_data");
-                                         product_data =reader.getJSONArray("product_data");
-
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    try {
-                                        status = order_data.getString("naqel_status_text");
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if(!status.equals("Shipment Picked Up")){
-                                        Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
-                                        intent.putExtra("order_data",order_data.toString());
-                                        intent.putExtra("product_data",product_data.toString());
-                                        startActivity(intent);
-                                    }else{
-                                        Intent intent = new Intent(BarCodeReaderActivity.this,OrderDetailActivity1.class);
-                                        intent.putExtra("order_data",order_data.toString());
-                                        intent.putExtra("product_data",product_data.toString());
-                                        startActivity(intent);
-                                    }
-
-
-
-                                }
-                            });
-                     }
-                }
-            });
+            orderService(id);
         }
     }
 
 
     private void requestCameraPermission() {
       //  Log.w(TAG, "Camera permission is not granted. Requesting permission");
+        BarCodeReaderActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final String[] permissions = new String[]{Manifest.permission.CAMERA};
 
-        final String[] permissions = new String[]{Manifest.permission.CAMERA};
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(BarCodeReaderActivity.this,
+                        Manifest.permission.CAMERA)) {
+                    ActivityCompat.requestPermissions(BarCodeReaderActivity.this, permissions, RC_HANDLE_CAMERA_PERM);
+                }
+            }
+        });
 
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.CAMERA)) {
-            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CAMERA_PERM);
-        }
     }
 
 
@@ -188,10 +140,6 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
             public void run() {
                 Context context = getApplicationContext();
 
-                // A barcode detector is created to track barcodes.  An associated multi-processor instance
-                // is set to receive the barcode detection results, track the barcodes, and maintain
-                // graphics for each barcode on screen.  The factory is used by the multi-processor to
-                // create a separate tracker instance for each barcode.
                 BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context)
                         .setBarcodeFormats(Barcode.ALL_FORMATS)
                         .build();
@@ -257,44 +205,47 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
         }
     }
 
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
+    public void onRequestPermissionsResult(final int requestCode,final
+                                           @NonNull String[] permissions,final
                                            @NonNull int[] grantResults) {
-        if (requestCode != RC_HANDLE_CAMERA_PERM) {
-            //   Log.d(TAG, "Got unexpected permission result: " + requestCode);
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            return;
-        }
 
-        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            //  Log.d(TAG, "Camera permission granted - initialize the camera source");
-            // we have permission, so create the camerasource
-            boolean autoFocus = true;
-            boolean useFlash = false;
-            createCameraSource(autoFocus, useFlash);
-            return;
-        }
+        BarCodeReaderActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (requestCode != RC_HANDLE_CAMERA_PERM) {
 
-        // Log.e(TAG, "Permission not granted: results len = " + grantResults.length +
-        //" Result code = " + (grantResults.length > 0 ? grantResults[0] : "(empty)"));
+                    BarCodeReaderActivity.super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                    return;
+                }
 
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                finish();
+                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    boolean autoFocus = true;
+                    boolean useFlash = false;
+                    createCameraSource(autoFocus, useFlash);
+                    return;
+                }
+
+
+
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(BarCodeReaderActivity.this);
+                builder.setTitle("Multitracker sample")
+                        .setMessage("No Camera Permission")
+                        .setPositiveButton("OK", listener)
+                        .show();
             }
-        };
+        });
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Multitracker sample")
-                .setMessage("No Camera Permission")
-                .setPositiveButton("OK", listener)
-                .show();
     }
 
 
     private void startCameraSource() throws SecurityException {
-        // check that the device has play services available.
-
 
         BarCodeReaderActivity.this.runOnUiThread(new Runnable() {
             @Override
@@ -320,8 +271,63 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
         });
 
     }
+  public void orderService(String id){
+
+      OkHttpClient okHttpClient = new OkHttpClient();
+      String url = "http://orders.ekuep.com/api/get-order-product-details/"+id;
+      final Request request = new Request.Builder().url(url).build();
+
+      okHttpClient.newCall(request).enqueue(new Callback() {
+          @Override
+          public void onFailure(Call call, IOException e) {
+              Toast.makeText(BarCodeReaderActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+          }
+
+          @Override
+          public void onResponse(Call call, Response response) throws IOException {
+
+              if(response.isSuccessful()){
+                  final String data = response.body().string();
+
+                  BarCodeReaderActivity.this.runOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+                          try {
+                              JSONObject reader = new JSONObject(data);
+                              order_data = reader.getJSONObject("order_data");
+                              product_data =reader.getJSONArray("product_data");
 
 
+                          } catch (JSONException e) {
+                              e.printStackTrace();
+                          }
+
+                          try {
+                              status = order_data.getString("naqel_status_text");
+                          } catch (JSONException e) {
+                              e.printStackTrace();
+                          }
+                          if(!status.equals("Shipment Picked Up")){
+                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
+                              intent.putExtra("order_data",order_data.toString());
+                              intent.putExtra("product_data",product_data.toString());
+                              startActivity(intent);
+                          }else{
+                              Intent intent = new Intent(BarCodeReaderActivity.this,OrderDetailActivity1.class);
+                              intent.putExtra("order_data",order_data.toString());
+                              intent.putExtra("product_data",product_data.toString());
+                              startActivity(intent);
+                          }
+
+
+
+                      }
+                  });
+              }
+          }
+      });
+
+  }
 
 
 }
