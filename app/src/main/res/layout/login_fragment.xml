@@ -7,7 +7,7 @@
         android:id="@+id/square_blue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/email_txt"
+        android:layout_above="@+id/email_txt"
         android:layout_marginBottom="20dp"
         android:src="@mipmap/splash_bg"
         android:scaleType="fitXY"

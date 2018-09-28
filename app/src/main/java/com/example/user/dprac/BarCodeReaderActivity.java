@@ -110,6 +110,7 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
              */
             String id = barcode.displayValue;
             orderService(id);
+
         }
     }
 
@@ -334,12 +335,7 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
                               intent.putExtra("product_data",product_data.toString());
                               startActivity(intent);
                           }
-//                         else if(!status.equals("Shipment Picked Up") && !status.equals("Shipment Delivered in Good Condition")){
-//                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
-//                              intent.putExtra("order_data",order_data.toString());
-//                              intent.putExtra("product_data",product_data.toString());
-//                              startActivity(intent);
-//                          }
+
 
 
                       }

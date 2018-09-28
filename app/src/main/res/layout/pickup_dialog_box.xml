@@ -14,7 +14,7 @@
         android:textColor="@color/secondary_text_color"
         android:textSize="16dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textStyle="bold"
 
         />
@@ -24,56 +24,58 @@
         android:layout_height="wrap_content"
         android:id="@+id/dialog_description1"
         android:text="Order is successfully picked up!"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/secondary_text_color"
         android:textSize="13dp"
         android:layout_gravity="center_horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"/>
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/line_color"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         >
 
     </View>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         >
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Go Back"
-            android:textColor="@color/primary_text_color"
-            android:textSize="14dp"
+            android:textColor="@color/dialog_box_text_color"
+            android:textSize="15dp"
             android:id="@+id/home_button"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingTop="5dp"/>
+            android:layout_weight="80"
+
+            android:gravity="center_vertical|center_horizontal"
+            />
 <View
-    android:layout_width="0.5dp"
+    android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:background="@color/line_color">
+    android:background="@color/line_color"
+    android:layout_weight="1">
 
 </View>
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Scan orders"
-            android:textSize="14dp"
+            android:textSize="15dp"
             android:textColor="@color/dialog_box_text_color"
             android:id="@+id/scan_button"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingTop="5dp"
+            android:layout_weight="80"
+            android:gravity="center_vertical|center_horizontal"
+
+
+
+
             />
     </LinearLayout>
 </LinearLayout>

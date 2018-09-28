@@ -108,6 +108,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
                   order_id = jsonObject.getString("order_id");
                     if(jsonObject.getString("qr_image")!=null){
+                        Toast.makeText(PickUpActivity.this,jsonObject.getString("qr_imagae"),Toast.LENGTH_LONG).show();
                         Glide.with(PickUpActivity.this).load(jsonObject.getString("qr_image")).into(order_image);
                     }
 
