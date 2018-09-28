@@ -2,7 +2,9 @@ package com.example.user.dprac;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -69,6 +71,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         }else {
             dialog = Helper.showProgressBar(getContext());
             dialog.show();
+
             JSONObject jsonObject = new JSONObject();
             try {
                 email = emailTxt.getEditText().getText().toString().trim();
@@ -110,18 +113,31 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                     status = reader.getString("status");
                                     JSONObject jsonToken = reader.getJSONObject("token");
                                     JSONObject user = reader.getJSONObject("user_object");
-                                    String id = user.getString("id");
-                                    String token = jsonToken.getString("token");
-                                    String email = user.getString("email");
+                                   final String id = user.getString("id");
+                                   final String token = jsonToken.getString("token");
+                                   final String email = user.getString("email");
                                     if(status.equals("200")){
+                                   Handler handler  = new Handler();
+                                   handler.postDelayed(new Runnable() {
+                                       @Override
+                                       public void run() {
+                                           SharedPrefManager.getInstance(getActivity()).StoreUser(id,email,token);
+                                           dialog.dismiss();
+                                           startActivity(new Intent(getContext(),MainActivity.class));
 
-                                   SharedPrefManager.getInstance(getActivity()).StoreUser(id,email,token);
-                                   dialog.dismiss();
-                                   startActivity(new Intent(getContext(),MainActivity.class));
+                                       }
+                                   },3000);
 
                                     }else{
-                                        dialog.dismiss();
-                                        Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dialog.dismiss();
+                                                Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
+                                            }
+                                        },3000);
+
                                     }
 
                                 } catch (JSONException e) {
@@ -132,14 +148,25 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
 
 
                     }else{
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
-                                Helper.invalidDialog(getContext());
-                            }
-                        });
-                    }
+                       Thread thread = new Thread(){
+                           @Override
+                           public void run() {
+                               try {
+                                   Thread.sleep(2000);
+                               } catch (InterruptedException e) {
+                               }
+                               getActivity().runOnUiThread(new Runnable() {
+                                   @Override
+                                    public void run() {
+                                      dialog.dismiss();
+                                       Helper.invalidDialog(getContext());
+                                    }
+                                });
+
+                           }
+                       };
+                       thread.start();
+                       }//end of else section
                 }
             });
 
@@ -178,11 +205,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         return matcher.matches();
     }
 
-    public void isLogin(){
 
-
-
-    }
 
 
 }
