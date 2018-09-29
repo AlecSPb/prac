@@ -33,7 +33,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="0.3dp"
         android:background="@color/line_color"
         android:layout_marginTop="20dp"
         >
@@ -52,7 +52,7 @@
             android:textColor="@color/dialog_box_text_color"
             android:textSize="15dp"
             android:id="@+id/home_button"
-            android:layout_weight="80"
+            android:layout_weight="170"
 
             android:gravity="center_vertical|center_horizontal"
             />
@@ -70,7 +70,7 @@
             android:textSize="15dp"
             android:textColor="@color/dialog_box_text_color"
             android:id="@+id/scan_button"
-            android:layout_weight="80"
+            android:layout_weight="170"
             android:gravity="center_vertical|center_horizontal"
 
 

@@ -45,7 +45,7 @@ public class SharedElementFragment1 extends Fragment {
         slideTransition.setDuration(500);
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
-        changeBoundsTransition.setDuration(500);
+       changeBoundsTransition.setDuration(500);
 
 
         sharedElementFragment2.setEnterTransition(slideTransition);
