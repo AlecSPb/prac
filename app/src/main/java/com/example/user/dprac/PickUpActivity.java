@@ -107,8 +107,8 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                   }
 
                   order_id = jsonObject.getString("order_id");
-                    if(jsonObject.getString("qr_image")!=null){
-                        //Toast.makeText(PickUpActivity.this,jsonObject.getString("qr_image"),Toast.LENGTH_LONG).show();
+                    if(jsonObject.getString("qr_image").equals(null)){
+                        Toast.makeText(PickUpActivity.this,jsonObject.getString("qr_image"),Toast.LENGTH_LONG).show();
                         Glide.with(PickUpActivity.this).load(jsonObject.getString("qr_image")).into(order_image);
                     }
 
@@ -187,8 +187,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                                     showPickUpOrder(PickUpActivity.this);
                                 }
                             });
-                              //final String data = response.body().string();
-//                             Toast.makeText(PickUpActivity.this,data,Toast.LENGTH_SHORT).show();
+
 
                         }
                     }
@@ -217,7 +216,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
-                TextView home = (TextView) dialog.findViewById(R.id.home_button);
+                TextView home = (TextView) dialog.findViewById(R.id.left_button);
                 home.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -230,7 +229,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 });
 
-                TextView scan = (TextView) dialog.findViewById(R.id.scan_button);
+                TextView scan = (TextView) dialog.findViewById(R.id.right_button);
                 scan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

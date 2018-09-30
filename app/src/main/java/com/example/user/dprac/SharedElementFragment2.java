@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,7 +34,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SharedElementFragment2 extends Fragment implements View.OnClickListener {
-  Button signIn;
+  RelativeLayout signIn;
   TextInputLayout emailTxt,passTxt;
   String email,password;
   String status;
@@ -43,7 +45,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
         ImageView squareBlue = (ImageView) view.findViewById(R.id.square_blue);
-        signIn = (Button)view.findViewById(R.id.signin_btn);
+        signIn = (RelativeLayout) view.findViewById(R.id.signin_btn);
         signIn.setOnClickListener(this);
 
         emailTxt = (TextInputLayout)view.findViewById(R.id.email_txt);
@@ -95,7 +97,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -126,7 +128,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                            startActivity(new Intent(getContext(),MainActivity.class));
 
                                        }
-                                   },3000);
+                                   },4000);
 
                                     }else{
                                         Handler handler = new Handler();
@@ -136,7 +138,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                                 dialog.dismiss();
                                                 Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
                                             }
-                                        },3000);
+                                        },4000);
 
                                     }
 
@@ -152,7 +154,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                            @Override
                            public void run() {
                                try {
-                                   Thread.sleep(2000);
+                                   Thread.sleep(3000);
                                } catch (InterruptedException e) {
                                }
                                getActivity().runOnUiThread(new Runnable() {

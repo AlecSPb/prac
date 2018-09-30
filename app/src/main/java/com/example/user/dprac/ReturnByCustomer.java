@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.dprac.Adapters.ProductAdapter;
@@ -37,7 +38,7 @@ public class ReturnByCustomer extends AppCompatActivity implements View.OnClickL
     TextView bar_title;
     ImageView bar_icon;
     Toolbar toolbar;
-    Button return_to_origin;
+    LinearLayout return_to_origin;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class ReturnByCustomer extends AppCompatActivity implements View.OnClickL
 
 
         productView = (RecyclerView)findViewById(R.id.product_list);
-        return_to_origin = (Button) findViewById(R.id.return_to_origin);
+        return_to_origin = (LinearLayout) findViewById(R.id.return_to_origin);
 
         heading = (TextView)findViewById(R.id.heading_order_details);
         total = (Button)findViewById(R.id.total_amount);
@@ -123,7 +124,7 @@ public class ReturnByCustomer extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
              switch (view.getId()){
                  case R.id.return_to_origin:
-                     Helper.showDialogBox(ReturnByCustomer.this,"Return to Origin?","Are you sure you want to return to origin?","Please confirm that the package is returned to origin.","Return to Origin",order_id);
+                     Helper.showDialogBox(ReturnByCustomer.this,"Return to Origin?","Are you sure you want to return to origin?","Return to Origin",order_id);
                  break;
              }
     }

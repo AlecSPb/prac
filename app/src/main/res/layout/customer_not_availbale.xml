@@ -1,138 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pick_up"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar">
 
     </include>
 
     <RelativeLayout
+        android:id="@+id/text_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_box"
-        android:background="@drawable/activity_background"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/activity_background">
 
         <TextView
+            android:id="@+id/heading_order_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Details"
             android:layout_alignParentLeft="true"
             android:padding="10dp"
-            android:id="@+id/heading_order_details"/>
+            android:text="Order Details" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تفاصيل الطلب"
             android:layout_alignParentRight="true"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:text="تفاصيل الطلب" />
 
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/product_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_box"
-        android:id="@+id/product_list"
         android:layout_above="@+id/seperator"
-        >
+        android:layout_below="@+id/text_box">
 
     </android.support.v7.widget.RecyclerView>
 
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+    <LinearLayout
         android:id="@+id/package_return_button"
-        android:orientation="horizontal"
-        android:background="@drawable/package_return_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_above="@+id/return_to_origin"
-        >
-
-    </Button>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/return_to_origin"
-        android:orientation="horizontal"
-        android:background="@drawable/return_to_origin"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-
-        >
-
-    </Button>
-
-
-
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_above="@+id/package_return_button"
-        android:id="@+id/deliver_package_button"
+        android:background="@drawable/return_by_customer_background"
         android:orientation="horizontal"
-        android:background="@drawable/package_delivered_button"
-        android:layout_marginBottom="10dp">
+        android:weightSum="11">
+
+        <ImageView
+            android:id="@+id/english_text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:duplicateParentState="true"
+            android:paddingBottom="14dp"
+            android:paddingRight="35dp"
+            android:paddingTop="14dp"
+            android:src="@drawable/package_return_english_text" />
 
 
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:duplicateParentState="true"
+            android:padding="15dp"
+            android:src="@drawable/package_return_icon" />
 
-    </Button>
+
+        <ImageView
+            android:id="@+id/arabic_text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:duplicateParentState="true"
+            android:paddingBottom="18dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="18dp"
+            android:src="@drawable/package_return_arabic_text"
+
+            />
+
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/return_to_origin"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:layout_above="@+id/deliver_package_button"
+        android:background="@drawable/return_to_origin_background"
+        android:weightSum="11"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:id="@+id/english_text3"
+            android:src="@drawable/return_to_origin_onpress_english_text"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:paddingRight="35dp"
+            android:duplicateParentState="true"/>
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/icon3"
+            android:src="@drawable/return_to_origin_icon"
+            android:padding="15dp"
+            android:duplicateParentState="true"/>
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:id="@+id/arabic_text3"
+            android:src="@drawable/return_to_origin_onpress_arabic_text"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:duplicateParentState="true"
+
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/deliver_package_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/package_return_button"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/sigin_button_background"
+        android:orientation="horizontal"
+        android:weightSum="11">
+
+        <ImageView
+            android:id="@+id/english_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:duplicateParentState="true"
+            android:paddingBottom="14dp"
+            android:paddingRight="35dp"
+            android:paddingTop="14dp"
+            android:src="@drawable/package_delivered_english_text" />
+
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:duplicateParentState="true"
+            android:padding="15dp"
+            android:src="@drawable/package_delivered_icon" />
+
+
+        <ImageView
+            android:id="@+id/arabic_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:duplicateParentState="true"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:src="@drawable/package_delivered_arabic_text"
+
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/total_amount_box"
-        android:layout_marginBottom="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/deliver_package_button"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/total_amount_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/total_amount_text"
-            android:text="Total Amount"
-            android:gravity="right"
+            android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/total_amount"
             android:layout_weight="3"
-            android:layout_marginRight="20dp"
+            android:gravity="right"
+            android:text="Total Amount"
             android:textColor="@color/secondary_text_color"
-            android:textSize="14dp"/>
+            android:textSize="14dp" />
+
         <Button
+            android:id="@+id/total_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:id="@+id/total_amount"
             android:layout_weight="1"
             android:background="@drawable/total_amount_button_background"
             android:text="SAR 8942.000"
-            android:textColor="@color/nav_text_color"
-            />
+            android:textColor="@color/nav_text_color" />
     </LinearLayout>
+
     <View
+        android:id="@+id/seperator"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:layout_above="@+id/total_amount_box"
-        android:id="@+id/seperator"
-        android:background="@color/primary_text_color"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/primary_text_color">
 
     </View>
 </RelativeLayout>

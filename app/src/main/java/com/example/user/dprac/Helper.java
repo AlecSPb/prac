@@ -8,6 +8,8 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,22 +25,21 @@ import okhttp3.Response;
 
 public class Helper {
 
-    public static void showDialogBox(final Context context, String title, String description1, String description2, final String text_button, final String order_id) {
+    public static void showDialogBox(final Context context, String title, String description1, final String text_button, final String order_id) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialog_box);
+        dialog.setContentView(R.layout.pickup_dialog_box);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         TextView dialog_title = (TextView) dialog.findViewById(R.id.dialog_title);
-        TextView dialog_description = (TextView) dialog.findViewById(R.id.dialog_description1);
-        TextView dialong_description2 = (TextView) dialog.findViewById(R.id.dialog_description2);
+        TextView dialog_description = (TextView) dialog.findViewById(R.id.dialog_description);
 
         dialog_title.setText(title);
         dialog_description.setText(description1);
-        dialong_description2.setText(description2);
 
-        TextView dialogBtn_cancel = (TextView) dialog.findViewById(R.id.back_button);
+        TextView dialogBtn_cancel = (TextView) dialog.findViewById(R.id.left_button);
+        dialogBtn_cancel.setText("Cancel");
         dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,12 +48,12 @@ public class Helper {
             }
         });
 
-        final TextView confirm = (TextView) dialog.findViewById(R.id.confirm_button);
+        final TextView confirm = (TextView) dialog.findViewById(R.id.right_button);
         confirm.setText(text_button);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (text_button.equals("Yes,Customer not available")) {
+                if (text_button.equals("Confirm")) {
                     StatusUpdateService(context, order_id, "Customer not available");
                     dialog.dismiss();
                     Toast.makeText(context,"Customer not Available",Toast.LENGTH_SHORT).show();
@@ -121,13 +122,15 @@ public class Helper {
 
 
 
-    public static Dialog showProgressBar(Context context) {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_progress_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        return dialog;
-    }
+        public static Dialog showProgressBar(Context context) {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.custom_progress_dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            AVLoadingIndicatorView loader = (AVLoadingIndicatorView)dialog.findViewById(R.id.progress_bar);
+            loader.show();
+            return dialog;
+        }
 
 
     public static void invalidDialog(Context context){

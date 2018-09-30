@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +41,7 @@ public class DeliveredOrderActivity extends AppCompatActivity implements View.On
     TextView bar_title;
     ImageView bar_icon;
     Toolbar toolbar;
-    Button back;
+    LinearLayout back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,7 @@ public class DeliveredOrderActivity extends AppCompatActivity implements View.On
 
 
         productView = (RecyclerView)findViewById(R.id.product_list);
-        back = (Button) findViewById(R.id.back_button);
+        back = (LinearLayout) findViewById(R.id.back_button);
 
         heading = (TextView)findViewById(R.id.heading_order_details);
         total = (Button)findViewById(R.id.total_amount);

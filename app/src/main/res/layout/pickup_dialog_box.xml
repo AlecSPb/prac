@@ -22,14 +22,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dialog_description1"
-        android:text="Order is successfully picked up!"
-        android:layout_marginTop="10dp"
+        android:id="@+id/dialog_description"
+        android:text="Order is successfully picked up."
         android:textColor="@color/secondary_text_color"
         android:textSize="13dp"
         android:layout_gravity="center_horizontal"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"/>
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
+        android:layout_marginTop="5dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
     </View>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         >
 
@@ -51,9 +51,8 @@
             android:text="Go Back"
             android:textColor="@color/dialog_box_text_color"
             android:textSize="15dp"
-            android:id="@+id/home_button"
-            android:layout_weight="170"
-
+            android:id="@+id/left_button"
+            android:layout_weight="250"
             android:gravity="center_vertical|center_horizontal"
             />
 <View
@@ -69,8 +68,8 @@
             android:text="Scan orders"
             android:textSize="15dp"
             android:textColor="@color/dialog_box_text_color"
-            android:id="@+id/scan_button"
-            android:layout_weight="170"
+            android:id="@+id/right_button"
+            android:layout_weight="250"
             android:gravity="center_vertical|center_horizontal"
 
 

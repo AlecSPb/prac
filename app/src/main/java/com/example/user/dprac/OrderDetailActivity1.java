@@ -40,7 +40,7 @@ public class OrderDetailActivity1 extends AppCompatActivity implements View.OnCl
     TextView bar_title;
     ImageView bar_icon;
     Toolbar toolbar;
-    Button deliver_button,return_button,customer_not_available_button;
+    LinearLayout deliver_button,customer_not_available_button,return_button;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +68,9 @@ public class OrderDetailActivity1 extends AppCompatActivity implements View.OnCl
 
 
         productView = (RecyclerView)findViewById(R.id.product_list);
-        deliver_button = (Button) findViewById(R.id.deliver_package_button);
-        return_button = (Button) findViewById(R.id.package_return_button);
-        customer_not_available_button = (Button) findViewById(R.id.customer_not_available_button);
+        deliver_button = (LinearLayout) findViewById(R.id.deliver_package_button);
+        return_button = (LinearLayout) findViewById(R.id.package_return_button);
+        customer_not_available_button = (LinearLayout) findViewById(R.id.customer_not_available_button);
         heading = (TextView)findViewById(R.id.heading_order_details);
         total = (Button)findViewById(R.id.total_amount);
 
@@ -134,15 +134,15 @@ public class OrderDetailActivity1 extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.package_return_button:
-                Helper.showDialogBox(OrderDetailActivity1.this,"Package Return?","Are you sure the package is returned?","Please confirm that the package is returned","Mark as Return",order_id);
+                Helper.showDialogBox(OrderDetailActivity1.this,"Package Return?","Are you sure the package is returned?","Mark as Return",order_id);
                 break;
 
             case R.id.customer_not_available_button:
-                Helper.showDialogBox(OrderDetailActivity1.this,"Customer not available?","Are you sure customer is not available?","Please confirm that the customer is not available.","Yes,Customer not available",order_id);
+                Helper.showDialogBox(OrderDetailActivity1.this,"Customer not available?","Are you sure customer is not available?","Confirm",order_id);
                 break;
 
             case R.id.deliver_package_button:
-                Helper.showDialogBox(OrderDetailActivity1.this,"Deliver Package?","Are you sure the package is delivered?","Please confirm that the package is delivered","Mark as delivered",order_id);
+                Helper.showDialogBox(OrderDetailActivity1.this,"Deliver Package?","Are you sure the package is delivered?","Mark as delivered",order_id);
                 break;
         }
     }

@@ -13,15 +13,46 @@
         android:scaleType="fitXY"
         android:transitionName="@string/square_blue_name"/>
 
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@mipmap/signin_btn"
-        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
-        android:id="@+id/signin_btn"/>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/sigin_button_background"
+        android:weightSum="10"
+        android:id="@+id/signin_btn"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:id="@+id/english_text"
+            android:src="@drawable/signin_english_text"
+            android:duplicateParentState="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:id="@+id/arabic_text"
+            android:src="@drawable/signin_arabic_text"
+            android:duplicateParentState="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+
+
+            />
+
+    </RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,28 +64,28 @@
         android:textColor="@color/dialog_box_text_color"
         />
 
-        <android.support.design.widget.TextInputLayout
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/password_txt"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:id="@+id/email_txt"
+        app:errorEnabled="true"
+        android:transitionGroup="true"
+
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/password_txt"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:id="@+id/email_txt"
-            app:errorEnabled="true"
-            android:transitionGroup="true"
+            android:inputType="textEmailAddress"
+            android:hint="Email/Username"
+            android:theme="@style/TextLabel"
 
-            >
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email/Username"
-                android:theme="@style/TextLabel"
-
-                />
-        </android.support.design.widget.TextInputLayout>
+            />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

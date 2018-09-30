@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.dprac.Adapters.ProductAdapter;
@@ -38,7 +39,7 @@ public class CustomerNotAvailable extends AppCompatActivity implements View.OnCl
     TextView bar_title;
     ImageView bar_icon;
     Toolbar toolbar;
-    Button deliver_button,return_button,return_to_origin;
+    LinearLayout deliver_button,return_button,return_to_origin;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +68,9 @@ public class CustomerNotAvailable extends AppCompatActivity implements View.OnCl
 
 
         productView = (RecyclerView)findViewById(R.id.product_list);
-        deliver_button = (Button) findViewById(R.id.deliver_package_button);
-        return_button = (Button) findViewById(R.id.package_return_button);
-        return_to_origin = (Button) findViewById(R.id.return_to_origin);
+        deliver_button = (LinearLayout) findViewById(R.id.deliver_package_button);
+        return_button = (LinearLayout) findViewById(R.id.package_return_button);
+        return_to_origin = (LinearLayout) findViewById(R.id.return_to_origin);
         heading = (TextView)findViewById(R.id.heading_order_details);
         total = (Button)findViewById(R.id.total_amount);
 
@@ -132,15 +133,15 @@ public class CustomerNotAvailable extends AppCompatActivity implements View.OnCl
 
         switch (view.getId()){
             case R.id.package_return_button:
-                Helper.showDialogBox(CustomerNotAvailable.this,"Package Return?","Are you sure the package is returned?","Please confirm that the package is returned","Mark as Return",order_id);
+                Helper.showDialogBox(CustomerNotAvailable.this,"Package Return?","Are you sure the package is returned?","Mark as Return",order_id);
                 break;
 
             case R.id.return_to_origin:
-                Helper.showDialogBox(CustomerNotAvailable.this,"Return to Origin?","Are you sure you want to return to origin?","Please confirm that the package is returned to origin.","Return to Origin",order_id);
+                Helper.showDialogBox(CustomerNotAvailable.this,"Return to Origin?","Are you sure you want to return to origin?","Return to Origin",order_id);
                 break;
 
             case R.id.deliver_package_button:
-                Helper.showDialogBox(CustomerNotAvailable.this,"Deliver Package?","Are you sure the package is delivered?","Please confirm that the package is delivered","Mark as delivered",order_id);
+                Helper.showDialogBox(CustomerNotAvailable.this,"Deliver Package?","Are you sure the package is delivered?","Mark as delivered",order_id);
                 break;
         }
 
