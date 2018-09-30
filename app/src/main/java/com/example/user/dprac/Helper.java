@@ -1,8 +1,11 @@
 package com.example.user.dprac;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -14,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import android.os.Handler;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -23,7 +27,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Helper {
+public class Helper extends AppCompatActivity{
 
     public static void showDialogBox(final Context context, String title, String description1, final String text_button, final String order_id) {
         final Dialog dialog = new Dialog(context);
@@ -43,33 +47,40 @@ public class Helper {
         dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
 
         final TextView confirm = (TextView) dialog.findViewById(R.id.right_button);
         confirm.setText(text_button);
+        final Helper helper = new Helper();
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (text_button.equals("Confirm")) {
-                    StatusUpdateService(context, order_id, "Customer not available");
+               if (text_button.equals("Mark as delivered")) {
+                    helper.StatusUpdateService(context, order_id,"Shipment Delivered in Good Condition");
                     dialog.dismiss();
-                    Toast.makeText(context,"Customer not Available",Toast.LENGTH_SHORT).show();
-                } else if (text_button.equals("Mark as delivered")) {
-                    StatusUpdateService(context, order_id,"Shipment Delivered in Good Condition");
+                   // Toast.makeText(context,"Package Delivered",Toast.LENGTH_SHORT).show();
+
+                }else if (text_button.equals("Confirm")) {
+                    helper.StatusUpdateService(context, order_id, "Customer not available");
                     dialog.dismiss();
-                    Toast.makeText(context,"Package Delivered",Toast.LENGTH_SHORT).show();
+                 //  Toast.makeText(context,"Customer not Available",Toast.LENGTH_SHORT).show();
 
                 } else if (text_button.equals("Mark as Return")) {
-                    StatusUpdateService(context, order_id,"Return By Customer");
+                    helper.StatusUpdateService(context, order_id,"Return By Customer");
                     dialog.dismiss();
-                    Toast.makeText(context, "Order Returned", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Order Returned", Toast.LENGTH_SHORT).show();
                 }else if(text_button.equals("Return to Origin")){
-                    StatusUpdateService(context, order_id,"Return to Origin");
+                    helper.StatusUpdateService(context, order_id,"Return to Origin");
                     dialog.dismiss();
-                    Toast.makeText(context, "Order Returned to Origin", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Order Returned to Origin", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(text_button.equals("Yes")){
+                    helper.StatusUpdateService(context,order_id,"Shipment Picked Up");
+                    dialog.dismiss();
+                   // Toast.makeText(context,"Shipment Picked Up",Toast.LENGTH_LONG).show();
                 }
 
 
@@ -80,8 +91,9 @@ public class Helper {
     }
 
 
-    public static void StatusUpdateService(final Context context, String order_id, String status) {
-
+    public void StatusUpdateService(final Context context, String order_id, final String status) {
+        final Dialog progressBar = Helper.showProgressBar(context);
+        progressBar.show();
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("order_id", order_id);
@@ -110,10 +122,62 @@ public class Helper {
             public void onResponse(Call call, Response response) throws IOException {
 
                 if (response.isSuccessful()) {
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.dismiss();
 
+                                    if(status.equals("Shipment Picked Up")){
+                                        showPickUpOrder(context);
+                                        Toast.makeText(context,"spu",Toast.LENGTH_LONG).show();
+                                    }else if(status.equals("Shipment Delivered in Good Condition")){
+                                        Toast.makeText(context,"sd",Toast.LENGTH_LONG).show();
+                                        invalidDialog(context,"Success","Shipment Delivered in good condition.");
+                                    }else if(status.equals("Return By Customer")){
+                                        Toast.makeText(context,"rc",Toast.LENGTH_LONG).show();
+                                        invalidDialog(context,"Success","Order Returned by Customer.");
+                                    }else if(status.equals("Return to Origin")){
+                                        Toast.makeText(context,"ro",Toast.LENGTH_LONG).show();
+                                        invalidDialog(context,"Success","Order Returned to Origin.");
+                                    }else if(status.equals("Customer not available")){
+                                        invalidDialog(context,"Success","Customer not available marked.");
+                                        Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show();
+                                    }
 
-                    //final String data = response.body().string();
-//                             Toast.makeText(PickUpActivity.this,data,Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    };
+                    thread.start();
+
+                }else{
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.dismiss();
+
+                                }
+                            });
+
+                        }
+                    };
+                    thread.start();
+
                 }
             }
         });
@@ -154,5 +218,73 @@ public class Helper {
 
         dialog.show();
     }
+
+    public static void invalidDialog(Context context,String title,String description){
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_box_invalid_credentials);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        TextView dialog_title = (TextView)dialog.findViewById(R.id.dialog_title);
+        TextView dialog_desc = (TextView)dialog.findViewById(R.id.dialog_description);
+        TextView cancel = (TextView) dialog.findViewById(R.id.close_button);
+        dialog_title.setText(title);
+        dialog_desc.setText(description);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+
+        dialog.show();
+    }
+
+
+
+
+
+
+
+
+    public void showPickUpOrder(final Context context){
+        {
+
+            Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.pickup_dialog_box);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+            TextView home = (TextView) dialog.findViewById(R.id.left_button);
+            home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(intent);
+                    // dialog.dismiss();
+                }
+
+            });
+
+            TextView scan = (TextView) dialog.findViewById(R.id.right_button);
+            scan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //  Toast.makeText(context,"Okay" ,Toast.LENGTH_SHORT).show();
+                    ((Activity)context).finish();
+
+                }
+            });
+
+            dialog.show();
+        }
+    };
 
 }

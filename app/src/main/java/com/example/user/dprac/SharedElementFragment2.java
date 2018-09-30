@@ -120,6 +120,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                    final String email = user.getString("email");
                                     if(status.equals("200")){
                                    Handler handler  = new Handler();
+
                                    handler.postDelayed(new Runnable() {
                                        @Override
                                        public void run() {
@@ -136,7 +137,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                             @Override
                                             public void run() {
                                                 dialog.dismiss();
-                                                Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
+                                              //  Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
                                             }
                                         },4000);
 

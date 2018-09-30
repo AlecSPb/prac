@@ -152,47 +152,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.pick_button:
 
-
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("order_id", order_id);
-                    jsonObject.put("status", "Shipment Picked Up");
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                OkHttpClient client = new OkHttpClient();
-                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                // put your json here
-                RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-                Request request = new Request.Builder()
-                        .url(Constants.live_url+"update-order-status")
-                        .post(body)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Toast.makeText(PickUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-
-                        if (response.isSuccessful()) {
-                            PickUpActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    showPickUpOrder(PickUpActivity.this);
-                                }
-                            });
-
-
-                        }
-                    }
-                });
-
+                Helper.showDialogBox(PickUpActivity.this,"Pick Order?","Are you sure you want to pick this order?","Yes",order_id);
                 break;
 
             case R.id.back_button:
@@ -206,42 +166,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    public void showPickUpOrder(final Context context){
-{
 
-                Dialog dialog = new Dialog(context);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setCancelable(false);
-                dialog.setContentView(R.layout.pickup_dialog_box);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-
-                TextView home = (TextView) dialog.findViewById(R.id.left_button);
-                home.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        // dialog.dismiss();
-                    }
-
-                });
-
-                TextView scan = (TextView) dialog.findViewById(R.id.right_button);
-                scan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //  Toast.makeText(context,"Okay" ,Toast.LENGTH_SHORT).show();
-                        finish();
-
-                    }
-                });
-
-                dialog.show();
-            }
-        };
 
 
 

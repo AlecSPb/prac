@@ -27,8 +27,8 @@
         android:textColor="@color/secondary_text_color"
         android:textSize="13dp"
         android:layout_gravity="center_horizontal"
-        android:paddingLeft="45dp"
-        android:paddingRight="45dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:layout_marginTop="5dp"/>
 
     <View
@@ -54,6 +54,7 @@
             android:id="@+id/left_button"
             android:layout_weight="250"
             android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/ripple_effect"
             />
 <View
     android:layout_width="0dp"
@@ -71,6 +72,7 @@
             android:id="@+id/right_button"
             android:layout_weight="250"
             android:gravity="center_vertical|center_horizontal"
+            android:background="?attr/selectableItemBackground"
 
 
 
