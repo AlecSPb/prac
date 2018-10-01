@@ -2,6 +2,7 @@ package com.example.user.dprac;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,6 +46,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
         ImageView squareBlue = (ImageView) view.findViewById(R.id.square_blue);
+
+
         signIn = (RelativeLayout) view.findViewById(R.id.signin_btn);
         signIn.setOnClickListener(this);
 
