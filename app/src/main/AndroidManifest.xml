@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <uses-feature android:name="android.hardware.camera"></uses-feature>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -74,6 +75,12 @@
             android:launchMode="singleTask">
 
         </activity>
+
+        <receiver android:name=".SmsReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

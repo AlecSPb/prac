@@ -10,14 +10,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 
 public class SharedElementFragment1 extends Fragment implements View.OnClickListener{
     ImageView login_btn,login_phone_btn;
     ImageView square_background,square_box,square_mobile,square_login_text;
     LinearLayout linearLayout;
+    RelativeLayout powered_by_box;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.splash_fragment, container, false);
@@ -33,21 +37,58 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
         login_phone_btn = (ImageView)view.findViewById(R.id.login_phone_btn);
         login_phone_btn.setOnClickListener(this);
 
+        powered_by_box = (RelativeLayout)view.findViewById(R.id.powered_by);
+
+        new CountDownTimer(2000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(SharedPrefManager.getInstance(getActivity()).isLoggedIn()){
+                    startActivity(new Intent(getActivity(),MainActivity.class));
+                }else{
+
+                    startAnimation(powered_by_box,R.anim.fade_out);
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                            }
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startAnimation(linearLayout,R.anim.slide_in_bottom);
+
+                                }
+                            });
+
+                        }
+                    };
+                    thread.start();
+
+
+                    }
+
+            }
+        }.start();
+
         return view;
+
+
+
+
     }
 
     private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
         Slide slideTransition = new Slide(Gravity.BOTTOM);
         slideTransition.setDuration(500);
-
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(500);
-
-
         fragment.setEnterTransition(slideTransition);
-
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
-
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))
@@ -71,5 +112,31 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
                 addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment3);
                 break;
         }
+    }
+
+
+    public void startAnimation(final View view, int anim){
+        Animation animation = AnimationUtils.loadAnimation(getContext(),anim);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                if(view.getVisibility() == View.VISIBLE){
+                    view.setVisibility(View.INVISIBLE);
+                }else if(view.getVisibility() == View.INVISIBLE ){
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+          view.startAnimation(animation);
     }
 }

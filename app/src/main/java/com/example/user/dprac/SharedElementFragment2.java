@@ -14,10 +14,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,6 +51,10 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
     ImageView login_phone_btn,login_btn;
     ImageView square_background, square_box, square_mobile, square_login_text;
     LinearLayout linearLayout;
+    TextView forgot_password;
+
+    boolean flag = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +62,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
 
 /**
  * Defining view Elements
+ *
  */
         square_background = (ImageView) view.findViewById(R.id.splash_background);
         square_box = (ImageView) view.findViewById(R.id.splash_box);
@@ -67,9 +76,49 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         signIn = (RelativeLayout) view.findViewById(R.id.signin_btn);
         signIn.setOnClickListener(this);
 
+        forgot_password = (TextView)view.findViewById(R.id.forgot_password);
+
 
         emailTxt = (TextInputLayout) view.findViewById(R.id.email_txt);
         passTxt = (TextInputLayout) view.findViewById(R.id.password_txt);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            flag = bundle.getBoolean("flag",false);
+        }
+
+        if(flag==true){
+            emailTxt.setVisibility(View.INVISIBLE);
+            passTxt.setVisibility(View.INVISIBLE);
+            signIn.setVisibility(View.INVISIBLE);
+            forgot_password.setVisibility(View.INVISIBLE);
+            Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.fade_in);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    emailTxt.setVisibility(View.VISIBLE);
+                    passTxt.setVisibility(View.VISIBLE);
+                    signIn.setVisibility(View.VISIBLE);
+                    forgot_password.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            emailTxt.startAnimation(animation);
+            passTxt.startAnimation(animation);
+            signIn.setAnimation(animation);
+            forgot_password.setAnimation(animation);
+        }
+
+
         return view;
     }
 
@@ -237,6 +286,9 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(500);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("flag",true);
+        fragment.setArguments(bundle);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
