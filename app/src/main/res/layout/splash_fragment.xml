@@ -1,20 +1,70 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/square_blue"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/splash_bg"
-        android:transitionName="@string/square_blue_name"
+        android:src="@drawable/splash_background"
+        android:id="@+id/splash_background"
+        android:transitionName="@string/square_background"
         android:scaleType="fitXY"
         />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash_boxes"
+        android:layout_alignParentRight="true"
+        android:id="@+id/splash_box"
+        android:transitionName="@string/square_box"
+        android:layout_marginRight="-140dp">
+
+    </ImageView>
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/splash_phone"
+        android:paddingRight="80dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="60dp"
+        android:paddingBottom="40dp"
+        android:transitionName="@string/square_mobile"
+        android:id="@+id/splash_mobile"
 
 
+        />
 
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/toolbar_box"
+        android:layout_marginBottom="20dp"
+        android:transitionName="@string/square_login_text">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_btn"
+            android:layout_weight="1"
+            android:id="@+id/login_btn"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_with_number_btn"
+            android:id="@+id/login_phone_btn"/>
+    </LinearLayout>
+</RelativeLayout>
+
+

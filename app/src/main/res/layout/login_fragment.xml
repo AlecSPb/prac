@@ -4,17 +4,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <ImageView
-        android:id="@+id/square_blue"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/email_txt"
-        android:layout_marginBottom="20dp"
-        android:src="@mipmap/splash_bg"
-        android:transitionName="@string/square_blue_name"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/splash_background"
         android:scaleType="fitXY"
-        android:layout_marginTop="-220dp"
+        android:id="@+id/splash_background"
+        android:transitionName="@string/square_background"
+        android:layout_above="@+id/email_txt"
 
         />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash_boxes"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="-255dp"
+        android:transitionName="@string/square_box"
+        android:layout_marginRight="-150dp"
+        android:layout_above="@+id/email_txt"
+        android:id="@id/splash_box"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/splash_phone"
+        android:paddingRight="80dp"
+        android:layout_centerHorizontal="true"
+        android:transitionName="@string/square_mobile"
+        android:id="@+id/splash_mobile"
+        android:paddingTop="60dp"
+        android:paddingBottom="40dp"
+        android:layout_marginTop="-100dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/toolbar_box"
+        android:layout_marginBottom="20dp"
+        android:transitionName="@string/square_login_text"
+        android:layout_above="@+id/email_txt"
+
+        >
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_btn"
+            android:layout_weight="1"
+            android:id="@+id/login_btn"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_with_number_btn"
+            android:id="@+id/login_phone_btn"/>
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +79,7 @@
         android:background="@drawable/sigin_button_background"
         android:weightSum="10"
         android:id="@+id/signin_btn"
+        android:transitionName="@string/square_signin_btn"
         >
 
         <ImageView

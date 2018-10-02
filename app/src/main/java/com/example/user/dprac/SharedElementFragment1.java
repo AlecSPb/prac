@@ -11,54 +11,65 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
-public class SharedElementFragment1 extends Fragment {
-
+public class SharedElementFragment1 extends Fragment implements View.OnClickListener{
+    ImageView login_btn,login_phone_btn;
+    ImageView square_background,square_box,square_mobile,square_login_text;
+    LinearLayout linearLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.splash_fragment, container, false);
-        final ImageView squareBlue = (ImageView) view.findViewById(R.id.square_blue);
-
-        new CountDownTimer(2000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            public void onFinish() {
-                if(SharedPrefManager.getInstance(getActivity()).isLoggedIn()){
-                    startActivity(new Intent(getActivity(),MainActivity.class));
-                }else{
-                    addNextFragment(squareBlue, false);
-                }
-
-            }
-        }.start();
+        /**
+         * Defining views elements
+         */
+        square_background = (ImageView) view.findViewById(R.id.splash_background);
+        square_box = (ImageView)view.findViewById(R.id.splash_box);
+        square_mobile = (ImageView) view.findViewById(R.id.splash_mobile);
+        linearLayout = (LinearLayout)view.findViewById(R.id.toolbar_box);
+        login_btn = (ImageView)view.findViewById(R.id.login_btn);
+        login_btn.setOnClickListener(this);
+        login_phone_btn = (ImageView)view.findViewById(R.id.login_phone_btn);
+        login_phone_btn.setOnClickListener(this);
 
         return view;
     }
 
-    private void addNextFragment( ImageView squareBlue, boolean overlap) {
-        SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
+    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
         Slide slideTransition = new Slide(Gravity.BOTTOM);
         slideTransition.setDuration(500);
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
-       changeBoundsTransition.setDuration(500);
+        changeBoundsTransition.setDuration(500);
 
 
-        sharedElementFragment2.setEnterTransition(slideTransition);
+        fragment.setEnterTransition(slideTransition);
 
-        sharedElementFragment2.setSharedElementEnterTransition(changeBoundsTransition);
+        fragment.setSharedElementEnterTransition(changeBoundsTransition);
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.sample2_content, sharedElementFragment2)
-                .addSharedElement(squareBlue, getString(R.string.square_blue_name))
+                .replace(R.id.sample2_content, fragment)
+                .addSharedElement(square_background, getString(R.string.square_background))
+                .addSharedElement(square_box,getString(R.string.square_box))
+                .addSharedElement(square_mobile,getString(R.string.square_mobile))
+                .addSharedElement(linearLayout,getString(R.string.square_login_text))
                 .commit();
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.login_btn:
+                SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
+                addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment2);
+                break;
 
-
+            case R.id.login_phone_btn:
+                SharedElementFragment3 sharedElementFragment3 = new SharedElementFragment3();
+                addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment3);
+                break;
+        }
+    }
 }

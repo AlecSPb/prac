@@ -28,13 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private void setupLayout() {
 
         if(!flag){
-//            Slide slideTransition = new Slide(Gravity.LEFT);
-//            slideTransition.setDuration(500);
             SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
-//            sharedElementFragment1.setReenterTransition(slideTransition);
-//            sharedElementFragment1.setExitTransition(slideTransition);
-//            sharedElementFragment1.setSharedElementEnterTransition(new ChangeBounds());
-
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.sample2_content, sharedElementFragment1)
                     .commit();

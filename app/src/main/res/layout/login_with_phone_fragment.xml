@@ -1,0 +1,164 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+
+        android:id="@+id/splash_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/phone_box"
+        android:layout_marginBottom="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/splash_background"
+        android:transitionName="@string/square_background"
+
+        />
+
+    <ImageView
+        android:id="@+id/splash_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/phone_box"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="-150dp"
+        android:layout_marginTop="-200dp"
+        android:src="@drawable/splash_boxes"
+        android:transitionName="@string/square_box" />
+
+    <ImageView
+        android:id="@+id/splash_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-50dp"
+        android:paddingBottom="40dp"
+        android:paddingRight="80dp"
+        android:paddingTop="60dp"
+        android:src="@drawable/splash_phone"
+        android:transitionName="@string/square_mobile" />
+
+    <LinearLayout
+        android:id="@+id/toolbar_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/phone_box"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        android:transitionName="@string/square_login_text"
+
+        >
+
+        <ImageView
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_btn" />
+
+        <ImageView
+            android:id="@+id/login_phone_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_with_number_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/signin_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/return_by_customer_background"
+        android:orientation="horizontal"
+        android:weightSum="11"
+        android:transitionName="@string/square_signin_btn">
+
+        <ImageView
+            android:id="@+id/english_text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:duplicateParentState="true"
+            android:src="@drawable/login_number_en"
+
+            />
+
+
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:duplicateParentState="true"
+            android:padding="15dp"
+            android:src="@drawable/login_number_icon" />
+
+
+        <ImageView
+            android:id="@+id/arabic_text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="4"
+            android:duplicateParentState="true"
+            android:src="@drawable/login_number_ar"
+
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/phone_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signin_btn"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
+                app:ccp_countryPreference="pk,as,us"
+                app:ccp_defaultNameCode="pk"
+                app:ccp_hintExampleNumber="true"
+                android:layout_marginBottom="8dp"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/phone_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:transitionGroup="true"
+                app:errorEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone number"
+                    android:inputType="number"
+                    android:theme="@style/TextLabel" />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

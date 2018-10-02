@@ -6,8 +6,10 @@ import android.graphics.Matrix;
 import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.transition.ChangeBounds;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,45 +37,66 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SharedElementFragment2 extends Fragment implements View.OnClickListener {
-  RelativeLayout signIn;
-  TextInputLayout emailTxt,passTxt;
-  String email,password;
-  String status;
-  String data;
-  Dialog dialog;
+    RelativeLayout signIn;
+    TextInputLayout emailTxt, passTxt;
+    String email, password;
+    String status;
+    String data;
+    Dialog dialog;
+
+    ImageView login_phone_btn,login_btn;
+    ImageView square_background, square_box, square_mobile, square_login_text;
+    LinearLayout linearLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
-        ImageView squareBlue = (ImageView) view.findViewById(R.id.square_blue);
+/**
+ * Defining view Elements
+ */
+        square_background = (ImageView) view.findViewById(R.id.splash_background);
+        square_box = (ImageView) view.findViewById(R.id.splash_box);
+        square_mobile = (ImageView) view.findViewById(R.id.splash_mobile);
+        linearLayout = (LinearLayout) view.findViewById(R.id.toolbar_box);
 
-
+        login_phone_btn = (ImageView) view.findViewById(R.id.login_phone_btn);
+        login_phone_btn.setOnClickListener(this);
+        login_btn = (ImageView)view.findViewById(R.id.login_btn);
+        login_btn.setImageResource(R.drawable.login_btn_selected);
         signIn = (RelativeLayout) view.findViewById(R.id.signin_btn);
         signIn.setOnClickListener(this);
 
-        emailTxt = (TextInputLayout)view.findViewById(R.id.email_txt);
-        passTxt  = (TextInputLayout)view.findViewById(R.id.password_txt);
+
+        emailTxt = (TextInputLayout) view.findViewById(R.id.email_txt);
+        passTxt = (TextInputLayout) view.findViewById(R.id.password_txt);
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.signin_btn:
-
                 login();
+                break;
+
+
+            case R.id.login_phone_btn:
+                SharedElementFragment3 sharedElementFragment3 = new SharedElementFragment3();
+                addNextFragment(square_background, square_box, square_mobile, linearLayout, false, sharedElementFragment3);
+                login_btn.setImageResource(R.drawable.login_btn);
                 break;
         }
     }
 
     private void login() {
-        if(!validateEmail()){
+        if (!validateEmail()) {
             return;
-        }else if(!emailValidator(email)){
+        } else if (!emailValidator(email)) {
             emailTxt.setError("Please enter valid email");
-        }else if(!validatePassword()){
+        } else if (!validatePassword()) {
             return;
-        }else {
+        } else {
             dialog = Helper.showProgressBar(getContext());
             dialog.show();
 
@@ -93,7 +116,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             // put your json here
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
-                    .url(Constants.live_url+"login/driver")
+                    .url(Constants.live_url + "login/driver")
                     .post(body)
                     .build();
 
@@ -118,31 +141,31 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                                     status = reader.getString("status");
                                     JSONObject jsonToken = reader.getJSONObject("token");
                                     JSONObject user = reader.getJSONObject("user_object");
-                                   final String id = user.getString("id");
-                                   final String token = jsonToken.getString("token");
-                                   final String email = user.getString("email");
-                                    if(status.equals("200")){
-                                   Handler handler  = new Handler();
+                                    final String id = user.getString("id");
+                                    final String token = jsonToken.getString("token");
+                                    final String email = user.getString("email");
+                                    if (status.equals("200")) {
+                                        Handler handler = new Handler();
 
-                                   handler.postDelayed(new Runnable() {
-                                       @Override
-                                       public void run() {
-                                           SharedPrefManager.getInstance(getActivity()).StoreUser(id,email,token);
-                                           dialog.dismiss();
-                                           startActivity(new Intent(getContext(),MainActivity.class));
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                SharedPrefManager.getInstance(getActivity()).StoreUser(id, email, token);
+                                                dialog.dismiss();
+                                                startActivity(new Intent(getContext(), MainActivity.class));
 
-                                       }
-                                   },4000);
+                                            }
+                                        }, 4000);
 
-                                    }else{
+                                    } else {
                                         Handler handler = new Handler();
                                         handler.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
                                                 dialog.dismiss();
-                                              //  Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
+                                                //  Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_LONG).show();
                                             }
-                                        },4000);
+                                        }, 4000);
 
                                     }
 
@@ -153,56 +176,55 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                         });
 
 
-                    }else{
-                       Thread thread = new Thread(){
-                           @Override
-                           public void run() {
-                               try {
-                                   Thread.sleep(3000);
-                               } catch (InterruptedException e) {
-                               }
-                               getActivity().runOnUiThread(new Runnable() {
-                                   @Override
+                    } else {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(3000);
+                                } catch (InterruptedException e) {
+                                }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
                                     public void run() {
-                                      dialog.dismiss();
-                                       Helper.invalidDialog(getContext());
+                                        dialog.dismiss();
+                                        Helper.invalidDialog(getContext());
                                     }
                                 });
 
-                           }
-                       };
-                       thread.start();
-                       }//end of else section
+                            }
+                        };
+                        thread.start();
+                    }//end of else section
                 }
             });
 
         }
     }
 
-    private boolean validateEmail(){
+    private boolean validateEmail() {
         email = emailTxt.getEditText().getText().toString().trim();
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             emailTxt.setError("Email Field can't be empty");
             return false;
-        }else{
+        } else {
             emailTxt.setError(null);
             return true;
         }
     }
 
-    private boolean validatePassword(){
+    private boolean validatePassword() {
         password = passTxt.getEditText().getText().toString().trim();
-        if(password.isEmpty()){
+        if (password.isEmpty()) {
             passTxt.setError("Password Field can't be empty");
             return false;
-        }else{
+        } else {
             passTxt.setError(null);
             return true;
         }
     }
 
-    public boolean emailValidator(String email)
-    {
+    public boolean emailValidator(String email) {
         Pattern pattern;
         Matcher matcher;
         final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -211,7 +233,17 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         return matcher.matches();
     }
 
+    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
 
-
-
+        ChangeBounds changeBoundsTransition = new ChangeBounds();
+        changeBoundsTransition.setDuration(500);
+        fragment.setSharedElementEnterTransition(changeBoundsTransition);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.sample2_content, fragment)
+                .addSharedElement(square_background, getString(R.string.square_background))
+                .addSharedElement(square_box,getString(R.string.square_box))
+                .addSharedElement(square_mobile,getString(R.string.square_mobile))
+                .addSharedElement(linearLayout,getString(R.string.square_login_text))
+                .commit();
+    }
 }
