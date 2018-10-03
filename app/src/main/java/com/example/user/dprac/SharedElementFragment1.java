@@ -38,12 +38,10 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
         login_phone_btn.setOnClickListener(this);
 
         powered_by_box = (RelativeLayout)view.findViewById(R.id.powered_by);
-
         new CountDownTimer(2000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-
-            }
+                }
             public void onFinish() {
                 if(SharedPrefManager.getInstance(getActivity()).isLoggedIn()){
                     startActivity(new Intent(getActivity(),MainActivity.class));
@@ -68,19 +66,11 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
                         }
                     };
                     thread.start();
-
-
                     }
-
-            }
+                    }
         }.start();
-
         return view;
-
-
-
-
-    }
+        }
 
     private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
         Slide slideTransition = new Slide(Gravity.BOTTOM);

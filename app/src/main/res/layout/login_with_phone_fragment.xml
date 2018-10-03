@@ -136,7 +136,8 @@
             app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
             app:ccp_countryPreference="pk,as,us"
             app:ccp_defaultNameCode="pk"
-            app:ccp_hintExampleNumber="true" />
+            app:ccp_hintExampleNumber="true"
+            />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/phone_text"

@@ -55,7 +55,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
 
     boolean flag = false;
 
-
+    TextView code_text;
+    ImageView code_icon;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
@@ -77,6 +78,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         signIn.setOnClickListener(this);
 
         forgot_password = (TextView)view.findViewById(R.id.forgot_password);
+        code_text = (TextView)view.findViewById(R.id.code_text);
+        code_icon = (ImageView) view.findViewById(R.id.code_icon);
 
 
         emailTxt = (TextInputLayout) view.findViewById(R.id.email_txt);
@@ -91,6 +94,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             emailTxt.setVisibility(View.INVISIBLE);
             passTxt.setVisibility(View.INVISIBLE);
             signIn.setVisibility(View.INVISIBLE);
+            code_text.setVisibility(View.INVISIBLE);
+            code_icon.setVisibility(View.INVISIBLE);
             forgot_password.setVisibility(View.INVISIBLE);
             Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.fade_in);
             animation.setAnimationListener(new Animation.AnimationListener() {
@@ -100,6 +105,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                     passTxt.setVisibility(View.VISIBLE);
                     signIn.setVisibility(View.VISIBLE);
                     forgot_password.setVisibility(View.VISIBLE);
+                    code_icon.setVisibility(View.VISIBLE);
+                    code_text.setVisibility(View.VISIBLE);
                 }
 
                 @Override
@@ -116,6 +123,8 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             passTxt.startAnimation(animation);
             signIn.setAnimation(animation);
             forgot_password.setAnimation(animation);
+            code_icon.setAnimation(animation);
+            code_text.setAnimation(animation);
         }
 
 

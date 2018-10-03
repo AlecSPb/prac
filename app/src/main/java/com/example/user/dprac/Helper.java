@@ -8,6 +8,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -205,17 +207,12 @@ public class Helper extends AppCompatActivity{
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         TextView cancel = (TextView) dialog.findViewById(R.id.close_button);
-
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
-
-
         dialog.show();
     }
 
@@ -237,9 +234,6 @@ public class Helper extends AppCompatActivity{
                 dialog.dismiss();
             }
         });
-
-
-
         dialog.show();
     }
 
@@ -285,6 +279,34 @@ public class Helper extends AppCompatActivity{
 
             dialog.show();
         }
-    };
+    }
+
+
+    public static void startAnimation(Context context,final View view, int anim){
+        Animation animation = AnimationUtils.loadAnimation(context,anim);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                if(view.getVisibility() == View.VISIBLE){
+                    view.setVisibility(View.INVISIBLE);
+                }else if(view.getVisibility() == View.INVISIBLE ){
+                    view.setVisibility(View.VISIBLE);
+                }else if(view.getVisibility()==View.GONE){
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        view.startAnimation(animation);
+    }
 
 }

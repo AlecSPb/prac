@@ -1,14 +1,22 @@
 package com.example.user.dprac;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.transition.ChangeBounds;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -18,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +42,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SharedElementFragment3 extends Fragment implements View.OnClickListener {
+
+
   RelativeLayout login_phone;
   String status;
   String data;
@@ -47,14 +58,24 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
   boolean flag = false;
   TextView code_text;
   String code;
+  boolean verifyClickable;
+  boolean sendClickable;
+  boolean phone_clickable;
+  TextInputEditText phone_input;
+
+ //   public static final String PHONE_FRAGMENT = "phone_fragment";
+    SharedElementFragment3 sharedElementFragment3;
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.login_with_phone_fragment1, container, false);
+         sharedElementFragment3= new SharedElementFragment3();
+        verifyClickable = false;
+        sendClickable = true;
+        phone_clickable=false;
 
         login_phone = (RelativeLayout) view.findViewById(R.id.signin_btn);
         login_phone.setOnClickListener(this);
-
-
         login_btn = (ImageView)view.findViewById(R.id.login_btn);
         login_btn.setOnClickListener(this);
         login_phone_btn = (ImageView)view.findViewById(R.id.login_phone_btn);
@@ -70,8 +91,14 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
         code_send_btn.setOnClickListener(this);
 
         verification_code = (TextInputLayout)view.findViewById(R.id.verification_code);
+        verification_code.getEditText().setFocusable(false);
+        login_phone.setFocusable(false);
 
         phone_no = (TextInputLayout)view.findViewById(R.id.phone_text);
+
+        phone_input = (TextInputEditText)view.findViewById(R.id.phone);
+        phone_input.setOnClickListener(this);
+      //  phone_no.setOnClickListener(this);
         cpp = (CountryCodePicker)view.findViewById(R.id.ccp);
         country_code = cpp.getDefaultCountryCodeWithPlus();
         cpp.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
@@ -128,12 +155,6 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
             verification_code.setAnimation(animation);
         }
 
-
-
-
-
-
-
         return view;
     }
 
@@ -141,17 +162,37 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.signin_btn:
-                login();
+                if(verifyClickable){
+                    login();
+                }else{
+                    Helper.invalidDialog(getContext(),"Alert","Please enter your phone number first.");
+                }
+
                 break;
 
             case R.id.send_code_btn:
-                sendCode();
+                if(sendClickable){
+                    sendCode();
+                }else{
+                    // resend code
+                    showResendDialogBox(getContext(),"Resend Code","Do you want to resend code on this number?",0,this);
+                }
+
                 break;
 
             case R.id.login_btn:
                 SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
                 addNextFragment(square_background,square_box,square_mobile, toolbar_btn, false,sharedElementFragment2);
                 login_phone_btn.setImageResource(R.drawable.login_with_number_btn);
+                break;
+
+
+            case R.id.phone:
+                if(phone_clickable) {
+                    showResendDialogBox(getContext(),"Re Enter Phone Number","Do you want to re enter your phone number?",1,this);
+
+
+                }
                 break;
         }
     }
@@ -203,18 +244,19 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
                                 try {
                                     reader = new JSONObject(data);
                                     status = reader.getString("code");
+                                    JSONObject user = reader.getJSONObject("user");
+                                    final String id = user.getString("id");
+                                    final String token = reader.getString("token");
+                                    final String email = user.getString("email");
                                     if(status.equals("200")){
                                         Handler handler  = new Handler();
 
                                         handler.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
+                                                SharedPrefManager.getInstance(getActivity()).StoreUser(id, email, token);
                                                 dialog.dismiss();
-                                                Toast.makeText(getContext(),"Code is correct",Toast.LENGTH_LONG).show();
-                                                /**
-                                                 *
-                                                 * Store the user in shared Preferences and send the user to dashboard
-                                                 */
+                                                startActivity(new Intent(getContext(), MainActivity.class));
 
                                             }
                                         },4000);
@@ -295,7 +337,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
                 @Override
                 public void onFailure(Call call, IOException e) {
 //                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getContext(),"heelo",Toast.LENGTH_LONG).show();
+                //    Toast.makeText(getContext(),"hello",Toast.LENGTH_LONG).show();
                 }
 
                 @Override
@@ -321,13 +363,15 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
                                             @Override
                                             public void run() {
                                                 dialog.dismiss();
-                                                Toast.makeText(getContext(),"Code Sent",Toast.LENGTH_LONG).show();
-                                                SmsReceiver.bindListener(new SmsReceiver.SmsListener() {
-                                                    @Override
-                                                    public void messageReceived(String messageText) {
-                                                        Toast.makeText(getContext(),messageText,Toast.LENGTH_LONG).show();
-                                                    }
-                                                });
+                                                Helper.invalidDialog(getContext(),"Success","Code sent on your device");
+                                                phone_no.getEditText().setFocusable(false);
+                                                verification_code.getEditText().setFocusableInTouchMode(true);
+                                                verifyClickable=true;
+                                                sendClickable=false;
+                                                phone_clickable = true;
+                                                phone_no.getEditText().setClickable(true);
+
+
 
                                             }
                                         },4000);
@@ -416,5 +460,53 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
                 .addSharedElement(linearLayout,getString(R.string.square_login_text))
                 .commit();
     }
+
+    public void showResendDialogBox(final Context context, String title, String description, final int fg, final Fragment fragment) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.pickup_dialog_box);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView dialog_title = (TextView) dialog.findViewById(R.id.dialog_title);
+        TextView dialog_description = (TextView) dialog.findViewById(R.id.dialog_description);
+
+        dialog_title.setText(title);
+        dialog_description.setText(description);
+
+        TextView dialogBtn_cancel = (TextView) dialog.findViewById(R.id.left_button);
+        dialogBtn_cancel.setText("Cancel");
+        dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        final TextView confirm = (TextView) dialog.findViewById(R.id.right_button);
+        confirm.setText("Yes");
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fg==0){
+                    sendCode();
+                }else if(fg==1){
+                    Fragment frg = null;
+                    frg = getFragmentManager().findFragmentByTag("PHONE_FRAGMENT");
+                    getFragmentManager().beginTransaction()
+                            .detach(fragment).attach(fragment).commit();
+                }
+
+                dialog.dismiss();
+
+                }
+        });
+
+        dialog.show();
+    }
+
+
+
 
 }

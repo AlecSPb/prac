@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         if(bundle!=null){
             flag = bundle.getBoolean("flag");
         }
+
         setupLayout();
     }
 

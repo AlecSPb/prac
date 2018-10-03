@@ -15,4 +15,5 @@
     <color name="navbar_color">#434051</color>
     <color name="dialog_box_text_color">#77a1e2</color>
     <color name="line_color">#d7dbe4</color>
+    <color name="error_color">#FFDD2C00</color>
 </resources>
