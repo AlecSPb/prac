@@ -65,6 +65,12 @@ public class OrderDetailActivity1 extends AppCompatActivity implements View.OnCl
         bar_title = (TextView)findViewById(R.id.bar_title);
 
         bar_icon.setImageResource(R.drawable.arrow_icon);
+        bar_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         productView = (RecyclerView)findViewById(R.id.product_list);

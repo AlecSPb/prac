@@ -59,17 +59,21 @@ public class ReturnByCustomer extends AppCompatActivity implements View.OnClickL
         bar_title = (TextView)findViewById(R.id.bar_title);
 
         bar_icon.setImageResource(R.drawable.arrow_icon);
+        bar_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
-        productView = (RecyclerView)findViewById(R.id.product_list);
+
         return_to_origin = (LinearLayout) findViewById(R.id.return_to_origin);
-
         heading = (TextView)findViewById(R.id.heading_order_details);
         total = (Button)findViewById(R.id.total_amount);
-
         return_to_origin.setOnClickListener(this);
 
-
+        productView = (RecyclerView)findViewById(R.id.product_list);
         productView.hasFixedSize();
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(this,productList);

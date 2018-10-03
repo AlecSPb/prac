@@ -138,19 +138,19 @@ public class Helper extends AppCompatActivity{
 
                                     if(status.equals("Shipment Picked Up")){
                                         showPickUpOrder(context);
-                                        Toast.makeText(context,"spu",Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(context,"spu",Toast.LENGTH_LONG).show();
                                     }else if(status.equals("Shipment Delivered in Good Condition")){
-                                        Toast.makeText(context,"sd",Toast.LENGTH_LONG).show();
+                                       // Toast.makeText(context,"sd",Toast.LENGTH_LONG).show();
                                         invalidDialog(context,"Success","Shipment Delivered in good condition.");
                                     }else if(status.equals("Return By Customer")){
-                                        Toast.makeText(context,"rc",Toast.LENGTH_LONG).show();
+                                       // Toast.makeText(context,"rc",Toast.LENGTH_LONG).show();
                                         invalidDialog(context,"Success","Order Returned by Customer.");
                                     }else if(status.equals("Return to Origin")){
-                                        Toast.makeText(context,"ro",Toast.LENGTH_LONG).show();
+                                       // Toast.makeText(context,"ro",Toast.LENGTH_LONG).show();
                                         invalidDialog(context,"Success","Order Returned to Origin.");
                                     }else if(status.equals("Customer not available")){
                                         invalidDialog(context,"Success","Customer not available marked.");
-                                        Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show();
+                                       // Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show();
                                     }
 
                                 }

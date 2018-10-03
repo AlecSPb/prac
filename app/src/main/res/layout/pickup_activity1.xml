@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pick_up"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar">
+
+    </include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_box"
+        android:background="@drawable/activity_background"
+        android:layout_below="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Details"
+            android:layout_alignParentLeft="true"
+            android:padding="10dp"
+            android:id="@+id/heading_order_details"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تفاصيل الطلب"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/pick_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/save_button_background"
+        android:text="Pickup"
+        android:textColor="@android:color/white" />
+
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/cancel_button_background"
+        android:text="Cancel"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/payment_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/back_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:text="Payment status: Bank wire"
+        android:textColor="@color/primary_text_color"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/payment_status"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="Dammmam Khobar Highway Opposite Chamber of \n Commerce Dammmam Khobar Highway Opposite\nRiyad 31912,Saudia Arabia "
+        android:textColor="@color/secondary_text_color"
+        android:textSize="12dp"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginBottom="8dp"
+        />
+
+
+    <TextView
+        android:id="@+id/address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="Delivery Address"
+        android:textColor="@color/dialog_box_text_color"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/address_text"
+        android:id="@+id/total_amount_box"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/total_amount_text"
+            android:text="Total Amount"
+            android:gravity="right"
+            android:layout_toLeftOf="@+id/total_amount"
+            android:layout_weight="3"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="14dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:id="@+id/total_amount"
+            android:layout_weight="1"
+            android:background="@drawable/total_amount_button_background"
+            android:text="SAR 8942.000"
+            android:textColor="@color/nav_text_color"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_above="@+id/total_amount_box"
+        android:id="@+id/seperator"
+        android:background="@color/primary_text_color"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+    </View>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_box"
+        android:id="@+id/product_list"
+        android:layout_above="@+id/seperator"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
+
+
+
+
+
+

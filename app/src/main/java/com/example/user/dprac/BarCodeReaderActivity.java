@@ -4,6 +4,7 @@ package com.example.user.dprac;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -330,7 +331,7 @@ public class BarCodeReaderActivity extends AppCompatActivity implements BarcodeT
                               intent.putExtra("product_data",product_data.toString());
                               startActivity(intent);
                           }else{
-                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity.class);
+                              Intent intent = new Intent(BarCodeReaderActivity.this,PickUpActivity1.class);
                               intent.putExtra("order_data",order_data.toString());
                               intent.putExtra("product_data",product_data.toString());
                               startActivity(intent);

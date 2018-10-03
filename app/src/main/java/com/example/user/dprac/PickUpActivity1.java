@@ -1,7 +1,6 @@
 package com.example.user.dprac;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.dprac.Adapters.ProductAdapter;
@@ -25,28 +25,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeliveredOrderActivity extends AppCompatActivity implements View.OnClickListener {
+public class PickUpActivity1 extends AppCompatActivity implements View.OnClickListener {
+    TextView address,bar_title;
+    ImageView bar_icon;
+    String city,Address,postal_code,country;
+    JSONObject jsonObject;
+    Button pick_up,cancel;
+    String order_id;
+    Toolbar toolbar;
+
     RecyclerView productView;
     List<Product> productList;
     ProductAdapter productAdapter;
     JSONArray jsonArray;
-    JSONObject jsonObject1;
-    TextView heading;
     Button total;
-    String order_id;
-    TextView bar_title;
-    ImageView bar_icon;
-    Toolbar toolbar;
-    LinearLayout back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delivered_order);
+        setContentView(R.layout.pickup_activity1);
 
+        /**
+         * Setting up toolbar
+         *
+         */
         toolbar  =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,41 +73,49 @@ public class DeliveredOrderActivity extends AppCompatActivity implements View.On
             }
         });
 
-        productView = (RecyclerView)findViewById(R.id.product_list);
-        back = (LinearLayout) findViewById(R.id.back_button);
 
-        heading = (TextView)findViewById(R.id.heading_order_details);
+        address = (TextView)findViewById(R.id.address);
+        pick_up = (Button)findViewById(R.id.pick_button);
+        cancel = (Button)findViewById(R.id.back_button);
+        cancel.setOnClickListener(this);
+        pick_up.setOnClickListener(this);
+
         total = (Button)findViewById(R.id.total_amount);
 
-        back.setOnClickListener(this);
-
-
+        productView = (RecyclerView)findViewById(R.id.product_list);
         productView.hasFixedSize();
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(this,productList);
         productView.setLayoutManager(new LinearLayoutManager(this));
         productView.setAdapter(productAdapter);
-        //  prepareProduct();
+
+
+
         final Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                //Toast.makeText(OrderDetailActivity1.this,jsonArray.toString(),Toast.LENGTH_LONG).show();
-
-
                 try {
+                    bar_title.setText("Order # "+jsonObject.getString("order_id"));
+                    city = jsonObject.getString("city");
+                    postal_code = jsonObject.getString("postal_code");
+                    country = jsonObject.getString("country");
+                    Address = jsonObject.getString("address");
+                    if(jsonObject.getString("address")!=null){
+                        address.setText(Address+", \n"+city+" "+postal_code+","+country);
+                    }
+                    order_id = jsonObject.getString("order_id");
+
 
                     for(int i=0;i<jsonArray.length();i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        bar_title.setText("Order # "+jsonObject1.getString("order_id"));
 
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        //Toast.makeText(PickUpActivity1.this,jsonObject.toString(),Toast.LENGTH_LONG).show();
                         Product product = new Product(jsonObject.getString("name"),"Serial # "+jsonObject.getString("reference"),"5555.00",jsonObject.getString("qty"));
                         productList.add(product);
 
-
-                    }
-                    total.setText("SAR "+jsonObject1.getString("total_paid"));
-
-                } catch (JSONException e) {
+                        }
+                    total.setText("SAR "+jsonObject.getString("total_paid"));
+                    } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -115,27 +127,40 @@ public class DeliveredOrderActivity extends AppCompatActivity implements View.On
             @Override
             public void run() {
                 try {
+                    jsonObject = new JSONObject(getIntent().getStringExtra("order_data"));
                     jsonArray = new JSONArray(getIntent().getStringExtra("product_data"));
-                    jsonObject1 = new JSONObject(getIntent().getStringExtra("order_data"));
-                    order_id = jsonObject1.getString("order_id");
-                } catch (JSONException e) {
+
+                    } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
+
                 handler.sendEmptyMessage(0);
             }
+
+
         };
         Thread thread = new Thread(runnable);
         thread.start();
 
     }
 
+
+
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.pick_button:
+
+                Helper.showDialogBox(PickUpActivity1.this,"Pick Order?","Are you sure you want to pick this order?","Yes",order_id);
+                break;
+
             case R.id.back_button:
                 finish();
                 break;
 
+
         }
+
     }
 }
