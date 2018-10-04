@@ -41,4 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+    protected void onR
 }
