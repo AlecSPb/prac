@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
+        Constants.homePressed=false;
+
         /**
          * Adding Toolbar
          */
@@ -127,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("flag",true);
             finishAffinity();
             startActivity(intent);
-            }
 
+            }
         if(item.getItemId() == R.id.history){
             startActivity(new Intent(MainActivity.this,HistoryActivity.class));
         }

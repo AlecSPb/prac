@@ -33,37 +33,49 @@
             android:padding="10dp"/>
 
     </RelativeLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_alignParentBottom="true"
+    android:id="@+id/button_box"
+    android:weightSum="2"
+    android:layout_marginBottom="20dp">
     <Button
-        android:id="@+id/pick_button"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="48dp"
+        android:id="@+id/pick_button"
         android:background="@drawable/save_button_background"
         android:text="Pickup"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"/>
 
 
     <Button
-        android:id="@+id/back_button"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="48dp"
         android:background="@drawable/cancel_button_background"
         android:text="Cancel"
-        android:textColor="@android:color/white" />
+        android:id="@+id/back_button"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"/>
+
+
+</LinearLayout>
 
     <TextView
         android:id="@+id/payment_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/back_button"
+        android:layout_above="@+id/button_box"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
         android:text="Payment status: Bank wire"
@@ -75,13 +87,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/payment_status"
-        android:gravity="center_horizontal"
         android:padding="10dp"
         android:text="Dammmam Khobar Highway Opposite Chamber of \n Commerce Dammmam Khobar Highway Opposite\nRiyad 31912,Saudia Arabia "
         android:textColor="@color/secondary_text_color"
         android:textSize="12dp"
         android:lineSpacingExtra="5dp"
         android:layout_marginBottom="8dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         />
 
 

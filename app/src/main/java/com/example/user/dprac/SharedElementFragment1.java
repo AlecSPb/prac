@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,16 +70,18 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
                     }
                     }
         }.start();
+
         return view;
         }
 
-    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
+    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment,int position) {
         Slide slideTransition = new Slide(Gravity.BOTTOM);
         slideTransition.setDuration(500);
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(500);
         fragment.setEnterTransition(slideTransition);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
+        Constants.fragment_position=position;
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))
@@ -94,12 +97,12 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
         switch (view.getId()){
             case R.id.login_btn:
                 SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
-                addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment2);
+                addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment2,2);
                 break;
 
             case R.id.login_phone_btn:
                 SharedElementFragment3 sharedElementFragment3 = new SharedElementFragment3();
-                addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment3);
+                addNextFragment(square_background,square_box,square_mobile,linearLayout, false,sharedElementFragment3,3);
                 break;
         }
     }

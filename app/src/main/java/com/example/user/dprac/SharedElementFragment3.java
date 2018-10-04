@@ -13,6 +13,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.transition.ChangeBounds;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -452,6 +453,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
         bundle.putBoolean("flag",true);
         fragment.setArguments(bundle);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
+        Constants.fragment_position = 2;
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))
@@ -505,8 +507,6 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
 
         dialog.show();
     }
-
-
 
 
 }

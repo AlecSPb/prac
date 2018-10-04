@@ -11,6 +11,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.gms.common.internal.Objects;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -299,6 +302,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         bundle.putBoolean("flag",true);
         fragment.setArguments(bundle);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
+        Constants.fragment_position = 3;
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))
@@ -307,4 +311,6 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                 .addSharedElement(linearLayout,getString(R.string.square_login_text))
                 .commit();
     }
+
+
 }

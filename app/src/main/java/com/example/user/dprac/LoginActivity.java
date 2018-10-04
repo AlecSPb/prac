@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.util.concurrent.CompletionService;
+
 public class LoginActivity extends AppCompatActivity {
  boolean flag = false;
     @Override
@@ -23,18 +25,22 @@ public class LoginActivity extends AppCompatActivity {
             flag = bundle.getBoolean("flag");
         }
 
-        setupLayout();
+        //setupLayout();
+
+
     }
 
     private void setupLayout() {
 
         if(!flag){
             SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
+            Constants.fragment_position=1;
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.sample2_content, sharedElementFragment1)
                     .commit();
         }else{
             SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
+            Constants.fragment_position=2;
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.sample2_content,sharedElementFragment2)
                     .commit();
@@ -42,5 +48,52 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    protected void onR
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!Constants.homePressed){
+            setupLayout();
+        }else{
+            switch (Constants.fragment_position){
+                case 1:
+                    SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
+                    Constants.fragment_position=1;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.sample2_content, sharedElementFragment1)
+                            .commit();
+                    Constants.homePressed = false;
+                    break;
+
+                case 2:
+                    SharedElementFragment2 sharedElementFragment2 =new SharedElementFragment2();
+                    Constants.fragment_position=2;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.sample2_content, sharedElementFragment2)
+                            .commit();
+                    Constants.homePressed = false;
+                    break;
+
+
+                case 3:
+                    SharedElementFragment3 sharedElementFragment3 =new SharedElementFragment3();
+                    Constants.fragment_position=3;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.sample2_content, sharedElementFragment3)
+                            .commit();
+                    Constants.homePressed = false;
+                    break;
+            }
+        }
+        }
+
+
+
+
+    @Override
+    protected void onUserLeaveHint()
+    {
+        Constants.homePressed = true;
+        super.onUserLeaveHint();
+    }
 }
+
