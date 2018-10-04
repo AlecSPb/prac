@@ -52,7 +52,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
     Dialog dialog;
 
     ImageView login_phone_btn,login_btn;
-    ImageView square_background, square_box, square_mobile, square_login_text;
+    ImageView square_background, square_box, square_mobile, square_login_text,square_selected_tip;
     LinearLayout linearLayout;
     TextView forgot_password;
 
@@ -72,10 +72,12 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         square_box = (ImageView) view.findViewById(R.id.splash_box);
         square_mobile = (ImageView) view.findViewById(R.id.splash_mobile);
         linearLayout = (LinearLayout) view.findViewById(R.id.toolbar_box);
+        square_selected_tip = (ImageView)view.findViewById(R.id.selected_tip);
 
         login_phone_btn = (ImageView) view.findViewById(R.id.login_phone_btn);
         login_phone_btn.setOnClickListener(this);
         login_btn = (ImageView)view.findViewById(R.id.login_btn);
+        login_btn.setOnClickListener(this);
         login_btn.setImageResource(R.drawable.login_btn_selected);
         signIn = (RelativeLayout) view.findViewById(R.id.signin_btn);
         signIn.setOnClickListener(this);
@@ -144,9 +146,13 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
 
             case R.id.login_phone_btn:
                 SharedElementFragment3 sharedElementFragment3 = new SharedElementFragment3();
-                addNextFragment(square_background, square_box, square_mobile, linearLayout, false, sharedElementFragment3);
+                addNextFragment(square_background, square_box, square_mobile, linearLayout, false, sharedElementFragment3,square_selected_tip);
                 login_btn.setImageResource(R.drawable.login_btn);
                 break;
+
+            case R.id.login_btn:
+                break;
+
         }
     }
 
@@ -294,7 +300,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         return matcher.matches();
     }
 
-    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
+    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment,ImageView square_selected_tip) {
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(500);
@@ -309,6 +315,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
                 .addSharedElement(square_box,getString(R.string.square_box))
                 .addSharedElement(square_mobile,getString(R.string.square_mobile))
                 .addSharedElement(linearLayout,getString(R.string.square_login_text))
+                .addSharedElement(square_selected_tip,getString(R.string.square_selected_tip))
                 .commit();
     }
 

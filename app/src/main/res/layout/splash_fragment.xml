@@ -64,7 +64,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/login_btn"
+            android:src="@drawable/toolbar_login_button"
             android:layout_weight="1"
             android:id="@+id/login_btn"/>
 
@@ -72,9 +72,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/login_with_number_btn"
+            android:src="@drawable/toolbar_login_with_no_btn"
             android:id="@+id/login_phone_btn"/>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/selected_tip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="60dp"
+        android:id="@+id/selected_tip_left"
+        android:transitionName="@string/square_selected_tip"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/selected_tip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="100dp"
+        android:id="@+id/selected_tip_right"
+        android:transitionName="@string/square_selected_tip"
+        android:visibility="invisible"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

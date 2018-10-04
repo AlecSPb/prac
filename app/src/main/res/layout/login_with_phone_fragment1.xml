@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/code_icon"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         android:orientation="horizontal"
         android:transitionName="@string/square_login_text"
 
@@ -56,16 +56,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/login_btn" />
+            android:src="@drawable/toolbar_login_button"
+            android:clickable="true"/>
 
         <ImageView
             android:id="@+id/login_phone_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/login_with_number_btn" />
+            android:src="@drawable/toolbar_login_with_no_btn"
+            android:clickable="true"/>
     </LinearLayout>
-
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/code_icon"
+    android:layout_marginBottom="20dp"
+    android:src="@drawable/selected_tip"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="100dp"
+    android:transitionName="@string/square_selected_tip"
+    android:id="@+id/selected_tip"/>
 
     <RelativeLayout
         android:id="@+id/signin_btn"

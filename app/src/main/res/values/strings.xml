@@ -12,4 +12,5 @@
     <string name="square_mobile">square_mobile</string>
     <string name="square_login_text">square_login_text</string>
     <string name="square_signin_btn">square_signin_btn</string>
+    <string name="square_selected_tip">selected_tip</string>
 </resources>

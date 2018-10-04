@@ -54,7 +54,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
   String phone,verificationCode;
   TextInputLayout phone_no,verification_code;
   ImageView login_btn,login_phone_btn,code_icon;
-  ImageView square_background,square_box,square_mobile,square_login_text;
+  ImageView square_background,square_box,square_mobile,square_login_text,square_selected_tip;
   LinearLayout toolbar_btn,code_send_btn;
   boolean flag = false;
   TextView code_text;
@@ -80,11 +80,13 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
         login_btn = (ImageView)view.findViewById(R.id.login_btn);
         login_btn.setOnClickListener(this);
         login_phone_btn = (ImageView)view.findViewById(R.id.login_phone_btn);
+        login_phone_btn.setOnClickListener(this);
         login_phone_btn.setImageResource(R.drawable.login_with_number_btn_selected);
         square_background = (ImageView) view.findViewById(R.id.splash_background);
         square_box = (ImageView)view.findViewById(R.id.splash_box);
         square_mobile = (ImageView) view.findViewById(R.id.splash_mobile);
         toolbar_btn = (LinearLayout)view.findViewById(R.id.toolbar_box);
+        square_selected_tip = (ImageView)view.findViewById(R.id.selected_tip);
 
         code_text = (TextView)view.findViewById(R.id.code_text);
         code_icon = (ImageView) view.findViewById(R.id.code_icon);
@@ -183,7 +185,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
 
             case R.id.login_btn:
                 SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
-                addNextFragment(square_background,square_box,square_mobile, toolbar_btn, false,sharedElementFragment2);
+                addNextFragment(square_background,square_box,square_mobile, toolbar_btn, false,sharedElementFragment2,square_selected_tip);
                 login_phone_btn.setImageResource(R.drawable.login_with_number_btn);
                 break;
 
@@ -194,6 +196,9 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
 
 
                 }
+                break;
+
+            case R.id.login_phone_btn:
                 break;
         }
     }
@@ -445,7 +450,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
 
 
 
-    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment) {
+    private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment,ImageView square_selected_tip) {
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(500);
@@ -460,6 +465,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
                 .addSharedElement(square_box,getString(R.string.square_box))
                 .addSharedElement(square_mobile,getString(R.string.square_mobile))
                 .addSharedElement(linearLayout,getString(R.string.square_login_text))
+                .addSharedElement(square_selected_tip,getString(R.string.square_selected_tip))
                 .commit();
     }
 
