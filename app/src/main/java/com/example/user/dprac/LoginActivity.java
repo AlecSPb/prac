@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.concurrent.CompletionService;
@@ -51,43 +53,46 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //Toast.makeText(LoginActivity.this,"Start",Toast.LENGTH_LONG).show();
         if(!Constants.homePressed){
             setupLayout();
         }else{
-            switch (Constants.fragment_position){
-                case 1:
-                    SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
-                    Constants.fragment_position=1;
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.sample2_content, sharedElementFragment1)
-                            .commit();
-                    Constants.homePressed = false;
-                    break;
-
-                case 2:
-                    SharedElementFragment2 sharedElementFragment2 =new SharedElementFragment2();
-                    Constants.fragment_position=2;
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.sample2_content, sharedElementFragment2)
-                            .commit();
-                    Constants.homePressed = false;
-                    break;
-
-
-                case 3:
-                    SharedElementFragment3 sharedElementFragment3 =new SharedElementFragment3();
-                    Constants.fragment_position=3;
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.sample2_content, sharedElementFragment3)
-                            .commit();
-                    Constants.homePressed = false;
-                    break;
-            }
+            setUpFragments();
         }
         }
 
 
+  public void setUpFragments(){
+      switch (Constants.fragment_position){
+          case 1:
+              SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
+              Constants.fragment_position=1;
+              getSupportFragmentManager().beginTransaction()
+                      .replace(R.id.sample2_content, sharedElementFragment1)
+                      .commit();
+              Constants.homePressed = false;
+              break;
 
+          case 2:
+              SharedElementFragment2 sharedElementFragment2 =new SharedElementFragment2();
+              Constants.fragment_position=2;
+              getSupportFragmentManager().beginTransaction()
+                      .replace(R.id.sample2_content, sharedElementFragment2)
+                      .commit();
+              Constants.homePressed = false;
+              break;
+
+
+          case 3:
+              SharedElementFragment3 sharedElementFragment3 =new SharedElementFragment3();
+              Constants.fragment_position=3;
+              getSupportFragmentManager().beginTransaction()
+                      .replace(R.id.sample2_content, sharedElementFragment3)
+                      .commit();
+              Constants.homePressed = false;
+              break;
+      }
+  }
 
     @Override
     protected void onUserLeaveHint()
@@ -95,5 +100,37 @@ public class LoginActivity extends AppCompatActivity {
         Constants.homePressed = true;
         super.onUserLeaveHint();
     }
+
+
+    @Override
+    protected void onDestroy() {
+     //   Toast.makeText(LoginActivity.this,"Destroy",Toast.LENGTH_LONG).show();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        //Toast.makeText(LoginActivity.this,"Pause",Toast.LENGTH_LONG).show();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+       // Toast.makeText(LoginActivity.this,"Resume",Toast.LENGTH_LONG).show();
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        //Toast.makeText(LoginActivity.this,"Stop",Toast.LENGTH_LONG).show();
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+     //   Toast.makeText(LoginActivity.this,"Restart",Toast.LENGTH_LONG).show();
+        super.onRestart();
+    }
+
 }
 

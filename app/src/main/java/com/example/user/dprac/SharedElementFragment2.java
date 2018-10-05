@@ -303,7 +303,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
     private void addNextFragment( ImageView square_background,ImageView square_box,ImageView square_mobile,LinearLayout linearLayout, boolean overlap,Fragment fragment,ImageView square_selected_tip) {
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
-        changeBoundsTransition.setDuration(500);
+        changeBoundsTransition.setDuration(420);
         Bundle bundle = new Bundle();
         bundle.putBoolean("flag",true);
         fragment.setArguments(bundle);
