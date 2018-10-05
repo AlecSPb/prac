@@ -6,6 +6,7 @@ import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -26,11 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         if(bundle!=null){
             flag = bundle.getBoolean("flag");
         }
-
-        //setupLayout();
-
-
-    }
+        }
 
     private void setupLayout() {
 
@@ -101,36 +98,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onUserLeaveHint();
     }
 
-
-    @Override
-    protected void onDestroy() {
-     //   Toast.makeText(LoginActivity.this,"Destroy",Toast.LENGTH_LONG).show();
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onPause() {
-        //Toast.makeText(LoginActivity.this,"Pause",Toast.LENGTH_LONG).show();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-       // Toast.makeText(LoginActivity.this,"Resume",Toast.LENGTH_LONG).show();
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        //Toast.makeText(LoginActivity.this,"Stop",Toast.LENGTH_LONG).show();
-        super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-     //   Toast.makeText(LoginActivity.this,"Restart",Toast.LENGTH_LONG).show();
-        super.onRestart();
-    }
 
 }
 
