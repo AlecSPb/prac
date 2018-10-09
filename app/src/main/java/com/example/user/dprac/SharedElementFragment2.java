@@ -2,30 +2,20 @@ package com.example.user.dprac;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Matrix;
-import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
-import com.google.android.gms.common.internal.Objects;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +23,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -183,7 +172,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
             // put your json here
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
-                    .url(Constants.live_url + "login/driver")
+                    .url(Constants.login_url)
                     .post(body)
                     .build();
 
@@ -308,7 +297,7 @@ public class SharedElementFragment2 extends Fragment implements View.OnClickList
         bundle.putBoolean("flag",true);
         fragment.setArguments(bundle);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
-        Constants.fragment_position = 3;
+        Constants.login_fragment_position = 3;
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))

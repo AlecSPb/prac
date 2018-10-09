@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import android.os.Handler;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,6 +30,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Helper extends AppCompatActivity{
+    JSONArray order_data;
 
     public static void showDialogBox(final Context context, String title, String description1, final String text_button, final String order_id) {
         final Dialog dialog = new Dialog(context);
@@ -82,7 +83,6 @@ public class Helper extends AppCompatActivity{
                 else if(text_button.equals("Yes")){
                     helper.StatusUpdateService(context,order_id,"Shipment Picked Up");
                     dialog.dismiss();
-                   // Toast.makeText(context,"Shipment Picked Up",Toast.LENGTH_LONG).show();
                 }
 
 
@@ -110,7 +110,8 @@ public class Helper extends AppCompatActivity{
         // put your json here
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
-                .url(Constants.live_url+"update-order-status")
+                .url(Constants.update_order_status_url)
+                .header("Authorization","Bearer "+SharedPrefManager.getInstance(context).getToken())
                 .post(body)
                 .build();
 
@@ -197,7 +198,15 @@ public class Helper extends AppCompatActivity{
             loader.show();
             return dialog;
         }
-
+    public static Dialog showLoadingBar(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_loading_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        AVLoadingIndicatorView loader = (AVLoadingIndicatorView)dialog.findViewById(R.id.progress_bar);
+        loader.show();
+        return dialog;
+    }
 
     public static void invalidDialog(Context context){
         final Dialog dialog = new Dialog(context);
@@ -259,7 +268,7 @@ public class Helper extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, MainActivity.class);
+                    Intent intent = new Intent(context, DashboardActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                     // dialog.dismiss();
@@ -308,5 +317,8 @@ public class Helper extends AppCompatActivity{
         });
         view.startAnimation(animation);
     }
+
+
+
 
 }

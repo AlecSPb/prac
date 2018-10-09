@@ -3,35 +3,30 @@ package com.example.user.dprac.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.user.dprac.NotAvailableFragment;
 import com.example.user.dprac.OrderFragment;
 import com.example.user.dprac.ReturnFragment;
 
-public class PagerViewAdapter extends FragmentPagerAdapter {
-        public PagerViewAdapter(FragmentManager fm) {
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class PagerViewAdapter extends FragmentStatePagerAdapter {
+    private List<Fragment> fragmentList = new ArrayList<>();
+    public PagerViewAdapter(FragmentManager fm) {
         super(fm);
+    }
+
+
+    public void addFragment(Fragment fragment){
+        fragmentList.add(fragment);
     }
 
     @Override
     public Fragment getItem(int position) {
-     switch (position){
-         case 0:
-             OrderFragment orderFragment = new OrderFragment();
-             return orderFragment;
-
-         case 1:
-             NotAvailableFragment notAvailableFragment = new NotAvailableFragment();
-             return notAvailableFragment;
-
-
-         case 2:
-             ReturnFragment retrunFragment = new ReturnFragment();
-             return retrunFragment;
-
-             default:
-                 return null;
-     }
+        return fragmentList.get(position);
     }
 
     @Override

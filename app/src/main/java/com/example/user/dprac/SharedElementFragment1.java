@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +84,7 @@ public class SharedElementFragment1 extends Fragment implements View.OnClickList
         changeBoundsTransition.setDuration(500);
         fragment.setEnterTransition(slideTransition);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
-        Constants.fragment_position=position;
+        Constants.login_fragment_position =position;
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))

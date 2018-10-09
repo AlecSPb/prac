@@ -13,4 +13,18 @@
     <string name="square_login_text">square_login_text</string>
     <string name="square_signin_btn">square_signin_btn</string>
     <string name="square_selected_tip">selected_tip</string>
+
+
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+
+    <string name="grant_permission">Grant Permission</string>
+    <string name="permission_camera">This app needs camera permission to scan barcode</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="grant">GRANT</string>
+    <string name="cancel">CANCEL</string>
 </resources>

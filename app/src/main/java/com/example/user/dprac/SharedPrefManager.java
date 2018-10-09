@@ -12,6 +12,7 @@ public class SharedPrefManager {
     private static final String Key_Id = "Key_id";
     private static final String Key_Email = "Key_Email";
     private static final String Key_Token = "Key_Token";
+    private static String Key_data = "Key_data";
     private SharedPrefManager(Context context) {
         ctx = context;
     }
@@ -51,6 +52,32 @@ public class SharedPrefManager {
         editor.clear();
         editor.apply();
         return true;
+    }
+
+    public String getToken(){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(Key_Pref,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(Key_Token,null);
+    }
+
+
+    public String getUserId(){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(Key_Pref,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(Key_Id,null);
+    }
+    public boolean StoreOrderData(String data) {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(Key_Pref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Key_data,data);
+        editor.apply();
+        return true;
+
+
+    }
+
+
+    public String getOrderData(){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(Key_Pref,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(Key_data,null);
     }
 
 

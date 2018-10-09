@@ -6,14 +6,10 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.transition.ChangeBounds;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
 
@@ -225,7 +220,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
             // put your json here
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
-                    .url(Constants.live_url+"phone/verification/mobile")
+                    .url(Constants.verify_code_url)
                     .post(body)
                     .build();
 
@@ -335,7 +330,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
             // put your json here
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
-                    .url(Constants.live_url+"phone/send/code/mobile")
+                    .url(Constants.send_verification_code_url)
                     .post(body)
                     .build();
 
@@ -458,7 +453,7 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
         bundle.putBoolean("flag",true);
         fragment.setArguments(bundle);
         fragment.setSharedElementEnterTransition(changeBoundsTransition);
-        Constants.fragment_position = 2;
+        Constants.login_fragment_position = 2;
         getFragmentManager().beginTransaction()
                 .replace(R.id.sample2_content, fragment)
                 .addSharedElement(square_background, getString(R.string.square_background))
@@ -500,8 +495,6 @@ public class SharedElementFragment3 extends Fragment implements View.OnClickList
                 if(fg==0){
                     sendCode();
                 }else if(fg==1){
-                    Fragment frg = null;
-                    frg = getFragmentManager().findFragmentByTag("PHONE_FRAGMENT");
                     getFragmentManager().beginTransaction()
                             .detach(fragment).attach(fragment).commit();
                 }

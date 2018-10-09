@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/today_text_box"
                 android:background="@drawable/activity_background"
-                android:layout_marginBottom="8dp">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -49,42 +49,42 @@
 
             </android.support.v7.widget.RecyclerView>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/yesterday_text_box"
-                android:background="@drawable/activity_background"
-                android:layout_below="@+id/today_order_list"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/yesterday_text_box"-->
+                <!--android:background="@drawable/activity_background"-->
+                <!--android:layout_below="@+id/today_order_list"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginTop="8dp">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yesterday's Orders"
-                    android:layout_alignParentLeft="true"
-                    android:padding="10dp"
-                    android:id="@+id/heading_order_details"
-                    android:textColor="@color/secondary_text_color"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Yesterday's Orders"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:id="@+id/heading_order_details"-->
+                    <!--android:textColor="@color/secondary_text_color"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="طلب الأمس"
-                    android:layout_alignParentRight="true"
-                    android:padding="10dp"
-                    android:textColor="@color/secondary_text_color"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="طلب الأمس"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="@color/secondary_text_color"/>-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/yesterday_text_box"
-                android:id="@+id/yesterday_order_list"
-                >
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/yesterday_text_box"-->
+                <!--android:id="@+id/yesterday_order_list"-->
+                <!--&gt;-->
 
-            </android.support.v7.widget.RecyclerView>
+            <!--</android.support.v7.widget.RecyclerView>-->
 
         </RelativeLayout>
 

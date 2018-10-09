@@ -2,17 +2,8 @@ package com.example.user.dprac;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.ChangeBounds;
-import android.transition.Slide;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import java.util.concurrent.CompletionService;
 
 public class LoginActivity extends AppCompatActivity {
  boolean flag = false;
@@ -33,13 +24,13 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!flag){
             SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
-            Constants.fragment_position=1;
+            Constants.login_fragment_position =1;
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.sample2_content, sharedElementFragment1)
                     .commit();
         }else{
             SharedElementFragment2 sharedElementFragment2 = new SharedElementFragment2();
-            Constants.fragment_position=2;
+            Constants.login_fragment_position =2;
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.sample2_content,sharedElementFragment2)
                     .commit();
@@ -60,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
   public void setUpFragments(){
-      switch (Constants.fragment_position){
+      switch (Constants.login_fragment_position){
           case 1:
               SharedElementFragment1 sharedElementFragment1 =new SharedElementFragment1();
-              Constants.fragment_position=1;
+              Constants.login_fragment_position =1;
               getSupportFragmentManager().beginTransaction()
                       .replace(R.id.sample2_content, sharedElementFragment1)
                       .commit();
@@ -72,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
           case 2:
               SharedElementFragment2 sharedElementFragment2 =new SharedElementFragment2();
-              Constants.fragment_position=2;
+              Constants.login_fragment_position =2;
               getSupportFragmentManager().beginTransaction()
                       .replace(R.id.sample2_content, sharedElementFragment2)
                       .commit();
@@ -82,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
           case 3:
               SharedElementFragment3 sharedElementFragment3 =new SharedElementFragment3();
-              Constants.fragment_position=3;
+              Constants.login_fragment_position =3;
               getSupportFragmentManager().beginTransaction()
                       .replace(R.id.sample2_content, sharedElementFragment3)
                       .commit();
